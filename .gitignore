@@ -1,0 +1,18 @@
+# Dependencias
+node_modules/
+sistema/node_modules/
+
+# Base de datos local y estado de wrangler (nunca va al repositorio)
+sistema/.wrangler/
+.wrangler/
+
+# Carpeta que se genera para publicar la web
+publicar/
+
+# Archivos de trabajo
+*.log
+.DS_Store
+Thumbs.db
+
+# Fotos originales del cliente (pesan 126 MB; las versiones web están en assets/productos)
+assets/STOCK WEB LUBPOINT/

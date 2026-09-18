@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="es-AR">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>LUBPOINT · Sistema</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='40' fill='none' stroke='%239AEC3F' stroke-width='18'/><circle cx='50' cy='50' r='9' fill='%239AEC3F'/></svg>" />
+    <link rel="stylesheet" href="panel.css" />
+</head>
+
+<body>
+    <!-- ------------------------------------------------ Acceso -->
+    <section id="acceso" class="acceso">
+        <form class="acceso__caja" id="form-login">
+            <p class="acceso__marca">LUB<span>POINT</span></p>
+            <h1>Sistema</h1>
+            <label>Usuario
+                <input name="usuario" autocomplete="username" required autofocus />
+            </label>
+            <label>Contraseña
+                <input name="clave" type="password" autocomplete="current-password" required />
+            </label>
+            <button class="btn btn--verde" type="submit">Entrar</button>
+            <p class="aviso" id="login-error" hidden></p>
+        </form>
+    </section>
+
+    <!-- ------------------------------------------------ Panel -->
+    <div id="app" hidden>
+        <header class="barra">
+            <p class="barra__marca">LUB<span>POINT</span></p>
+            <nav class="barra__nav">
+                <button class="tab" data-vista="hoy">Hoy</button>
+                <button class="tab" data-vista="productos">Productos</button>
+                <button class="tab" data-vista="pedidos">Pedidos <span class="globo" id="globo-pedidos" hidden>0</span></button>
+                <button class="tab" data-vista="turnos">Turnos</button>
+                <button class="tab" data-vista="ventas">Ventas</button>
+                <button class="tab" data-vista="ajustes">Ajustes</button>
+            </nav>
+            <div class="barra__usuario">
+                <span id="quien"></span>
+                <button class="btn btn--borde" id="salir">Salir</button>
+            </div>
+        </header>
+
+        <main id="vista"></main>
+    </div>
+
+    <div class="aviso-flotante" id="mensaje" hidden></div>
+    <script src="panel.js"></script>
+</body>
+
+</html>

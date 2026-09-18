@@ -1,0 +1,1591 @@
+/* =====================================================================================
+   LUBPOINT · Capa de marca sobre la plantilla (css/webflow.css)
+   Fuente: Lubpoint_Manual_de_Marca.pdf (v1.0 · 2026)
+   · Grafito #1A1A1A domina los fondos · Blanco #FFFFFF ordena la lectura
+   · Verde eléctrico #9AEC3F solo como acento (nunca más del 20% de la pieza)
+   · Apoyo: Grafito 2 #232323 (tarjetas/paneles), Gris texto #8A8A8A, Verde profundo #2AB800,
+     Gris claro #F2F2F2
+   ===================================================================================== */
+
+/* ---------- Tipografías de marca (licencias compradas, en assets/fonts/) ----------
+   Morganite Semibold: titulares, siempre en mayúsculas.
+   Coolvetica Book: textos (peso regular). Coolvetica Light: pesos finos (300). */
+@font-face {
+  font-family: "Morganite";
+  src: url("../assets/fonts/Morganite-SemiBold.ttf") format("truetype");
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Coolvetica";
+  src: url("../assets/fonts/CoolveticaLt-Regular.ttf") format("truetype");
+  font-weight: 100 349;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Coolvetica";
+  src: url("../assets/fonts/CoolveticaBk-Regular.ttf") format("truetype");
+  font-weight: 350 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* ---------- Tokens ---------- */
+:root {
+  --lp-grafito: #1A1A1A;
+  --lp-grafito-2: #232323;
+  --lp-verde: #9AEC3F;
+  --lp-verde-profundo: #2AB800;
+  --lp-blanco: #FFFFFF;
+  --lp-gris-texto: #8A8A8A;
+  --lp-gris-claro: #F2F2F2;
+  --lp-grafito-0: rgba(26, 26, 26, 0);
+
+  /* Tokens de la plantilla remapeados a la marca.
+     La plantilla era clara (texto negro sobre blanco): los tonos "black" que se usaban como
+     texto/lineas sobre blanco pasan a blanco con alfa sobre grafito. */
+  --_colors---primary--100: var(--lp-verde);
+  --_colors---black--100: var(--lp-grafito);
+  --_colors---black--80: var(--lp-blanco);
+  --_colors---black--50: rgba(255, 255, 255, 0.5);
+  --_colors---black--20: rgba(255, 255, 255, 0.2);
+  --_colors---black--10: rgba(255, 255, 255, 0.1);
+  --_colors---black--5: rgba(255, 255, 255, 0.05);
+
+  --_typography---fonts--heading-font: "Morganite", Anton, "Arial Narrow", Arial, sans-serif;
+  --_typography---fonts--primary-font: "Coolvetica", "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+body {
+  /* webflow.css vuelve a declarar las fuentes en body (y en sus media queries):
+     se redefinen acá para que Morganite y Coolvetica ganen en todos los tamaños. */
+  --_typography---fonts--heading-font: "Morganite", Anton, "Arial Narrow", Arial, sans-serif;
+  --_typography---fonts--primary-font: "Coolvetica", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  background-color: var(--lp-grafito);
+  color: var(--lp-blanco);
+}
+
+/* ---------- Escala tipográfica para Morganite ----------
+   Los tamaños de la plantilla estaban pensados para Anton. Morganite es mucho más condensada y
+   "funciona por tamaño" (manual): se agranda sobre las mismas variables responsive, con
+   interlineado 85–90% y siempre en mayúsculas. */
+:root {
+  --lp-morganite-xl: 1.7;
+  --lp-morganite: 1.6;
+}
+.heading-large,
+.heading-xlarge {
+  font-size: calc(var(--_typography---heading-size--large) * var(--lp-morganite-xl));
+  line-height: 0.9;
+}
+.heading-medium {
+  font-size: calc(var(--_typography---heading-size--medium) * var(--lp-morganite));
+  line-height: 0.9;
+}
+.heading-small {
+  font-size: calc(var(--_typography---heading-size--small) * var(--lp-morganite));
+  line-height: 0.9;
+}
+.heading-xsmall {
+  font-size: calc(var(--_typography---heading-size--xsmall) * var(--lp-morganite));
+  line-height: 0.9;
+}
+.heading-large,
+.heading-xlarge,
+.heading-medium,
+.heading-small,
+.heading-xsmall,
+.bold-nav-full__link-text,
+.loader_number {
+  text-transform: uppercase;
+  letter-spacing: 0.01em;
+}
+.bold-nav-full__link-text {
+  font-size: 6rem;
+  line-height: 0.9;
+}
+.loader_number {
+  font-size: 17.5rem;
+}
+/* Botones y CTA en Coolvetica (manual de marca) */
+.button-099__text {
+  font-family: var(--_typography---fonts--primary-font);
+}
+@media (max-width: 767px) {
+  .heading-small {
+    font-size: calc(1.25rem * var(--lp-morganite));
+  }
+}
+@media (max-width: 479px) {
+  .heading-large.is-quote {
+    font-size: calc(2rem * var(--lp-morganite-xl));
+  }
+  .loader_number {
+    font-size: 15rem;
+  }
+}
+
+/* ---------- Fondos: todo en grafito ---------- */
+.section_default,
+.section_logo-wall,
+.section_media,
+.section_gallery,
+.section_sponsorguide,
+.section_footer,
+.section_404,
+.bg_finish_wrapper,
+.marquee-advanced__collection,
+.loader_cover,
+.loader_wrapper {
+  background-color: var(--lp-grafito);
+}
+
+.bg_text_gradient,
+.bg_text_gradient.is-black,
+.bg_finish_gradient,
+.radial_slider_pagination_gradient {
+  background-image: linear-gradient(0deg, var(--lp-grafito), var(--lp-grafito-0));
+}
+.bg_finish_gradient_v2 {
+  background-image: linear-gradient(var(--lp-grafito), var(--lp-grafito-0));
+}
+.radial_slider_gradient {
+  background-image: linear-gradient(180deg, var(--lp-grafito-0), var(--lp-grafito));
+}
+
+/* ---------- Tarjetas y paneles: Grafito 2 ---------- */
+.contact_block {
+  background-color: var(--lp-grafito-2);
+  color: var(--lp-blanco);
+}
+.slider_nav {
+  background-color: var(--lp-grafito-2);
+  border-color: rgba(255, 255, 255, 0.1);
+  color: var(--lp-blanco);
+}
+.input_field {
+  color: var(--lp-blanco);
+}
+.input_field:focus {
+  box-shadow: inset 0 0 0 1px var(--lp-verde);
+}
+
+/* ---------- Navegación ----------
+   El panel del menú era amarillo a pantalla completa; en grafito 2 para que el verde siga
+   siendo acento. La hamburguesa conserva el botón verde con barras grafito. */
+.bold-nav-full__tile {
+  background-color: var(--lp-grafito-2);
+}
+.bold-nav-full__li {
+  color: var(--lp-blanco);
+}
+.bold-nav-full__link.is--current {
+  color: var(--lp-verde);
+}
+
+/* Links de texto (variante "link" del botón): gris → verde al hover */
+.button-099__text.is--hover.w-variant-f12fdda8-227a-c6c8-9323-0817db9047d6 {
+  color: var(--lp-verde);
+}
+
+/* ---------- Loader ----------
+   Pantalla grafito (isotipo grafito ampliado), número en blanco, luces que se encienden en verde.
+   El zoom de salida se centra sobre el aro izquierdo del isotipo (36.13% del ancho a la
+   izquierda del centro) para que la pantalla quede cubierta al 100% antes de alejarse. */
+.loader_number.is-count {
+  color: var(--lp-blanco);
+}
+.loader_light {
+  background-color: rgba(255, 255, 255, 0.2);
+}
+.loader_number.is-transition-white,
+.loader_number.is-transition-yellow {
+  transform: translate(3613%) scale(100);
+}
+
+/* ---------- Header ----------
+   Foto única (assets/header.webp) + su mapa de profundidad para el efecto de color con el mouse.
+   El encuadre prioriza al piloto, sobre todo en pantallas verticales. */
+.image.is-header {
+  object-position: 40% 50%;
+}
+@media (max-width: 767px) {
+  .image.is-header {
+    object-position: 27% 50%;
+  }
+}
+
+/* ---------- Capas: el isotipo pasa POR DEBAJO del texto de "Nosotros" ----------
+   La sección deja de crear su propio contexto de apilado (z-index auto): su fondo queda debajo
+   del isotipo (que vive en #marcas, z-index 2) y el texto sube por encima con z-index 3. */
+#nosotros {
+  z-index: auto;
+}
+#nosotros .quote_wrapper {
+  position: relative;
+  z-index: 3;
+}
+
+/* ---------- Isotipo que desciende (reemplaza al casco) ---------- */
+.helmet_div {
+  transform: none; /* el logo no se rota ni se inclina */
+}
+.lp-gauge {
+  position: relative;
+  height: 82%;
+  aspect-ratio: 624 / 680;
+}
+.lp-gauge__layer {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: contain;
+  user-select: none;
+  -webkit-user-drag: none;
+  pointer-events: none;
+}
+/* El mismo archivo maestro en dos capas: cuerpo sin la aguja + la aguja sola.
+   La aguja gira sobre el centro del punto (49.74% 53.94%). */
+.lp-gauge__body {
+  clip-path: polygon(evenodd, 0% 0%, 100% 0%, 100% 100%, 0% 100%, 0% 0%, 56.651% 38.485%, 63.429% 31.000%, 74.647% 19.529%, 84.583% 10.559%, 91.314% 5.265%, 95.144% 2.574%, 95.833% 2.353%, 96.362% 2.426%, 96.875% 2.897%, 96.955% 3.529%, 96.394% 4.750%, 92.228% 11.515%, 87.372% 18.412%, 81.122% 26.353%, 72.308% 36.500%, 65.737% 43.706%, 64.471% 44.926%, 63.942% 45.000%, 63.093% 44.632%, 56.859% 39.735%, 56.571% 39.118%, 56.651% 38.485%);
+}
+.lp-gauge__needle {
+  clip-path: polygon(56.651% 38.485%, 63.429% 31.000%, 74.647% 19.529%, 84.583% 10.559%, 91.314% 5.265%, 95.144% 2.574%, 95.833% 2.353%, 96.362% 2.426%, 96.875% 2.897%, 96.955% 3.529%, 96.394% 4.750%, 92.228% 11.515%, 87.372% 18.412%, 81.122% 26.353%, 72.308% 36.500%, 65.737% 43.706%, 64.471% 44.926%, 63.942% 45.000%, 63.093% 44.632%, 56.859% 39.735%, 56.571% 39.118%);
+}
+.lp-gauge__pivot,
+.lp-gauge__needle {
+  transform-origin: 49.74% 53.94%;
+  will-change: transform;
+}
+
+/* ---------- Íconos de servicio (antes: muro de sponsors) ----------
+   Estilo del manual: lineales, trazo único 3.5/64, verde sobre grafito. */
+/* Las columnas pueden achicarse aunque la etiqueta sea larga (p. ej. "HERRAMIENTAS"). */
+[data-logo-wall="item"] {
+  min-width: 0;
+}
+.logo-wall_card.is-icon {
+  flex-direction: column;
+  gap: 1rem;
+  padding: 1.5rem 0.75rem;
+  background-color: var(--lp-grafito-2);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: var(--border-radius--small, 0.25rem);
+}
+.logo-wall_logo.is-icon {
+  width: 3.5rem;
+  height: 3.5rem;
+  flex: none;
+}
+.lp-icon-label {
+  margin: 0;
+  max-width: 100%;
+  font-family: var(--_typography---fonts--primary-font);
+  font-size: 0.75rem;
+  line-height: 1.2;
+  text-transform: uppercase;
+  letter-spacing: 0.3em; /* tracking +300 */
+  color: rgba(255, 255, 255, 0.8);
+  text-align: center;
+  overflow-wrap: anywhere;
+}
+@media (min-width: 768px) {
+  [data-logo-wall="list"] {
+    grid-template-columns: repeat(7, minmax(0, 1fr));
+  }
+}
+@media (min-width: 768px) and (max-width: 1199px) {
+  /* 7 columnas angostas: etiqueta más compacta para que cada palabra entre en una línea */
+  .logo-wall_card.is-icon {
+    padding: 1.25rem 0.3rem;
+  }
+  .lp-icon-label {
+    font-size: 0.625rem;
+    letter-spacing: 0.06em;
+  }
+}
+@media (max-width: 767px) {
+  [data-logo-wall="list"] {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+  .logo-wall_card.is-icon {
+    gap: 0.6rem;
+    padding: 1rem 0.4rem;
+  }
+  .logo-wall_logo.is-icon {
+    width: 2.5rem;
+    height: 2.5rem;
+  }
+  .lp-icon-label {
+    font-size: 0.625rem;
+    letter-spacing: 0.08em; /* en pantallas angostas se reduce para que la palabra entre completa */
+  }
+}
+
+/* ---------- Footer ---------- */
+.footer_logo {
+  mix-blend-mode: normal;
+  width: 10rem;
+}
+.footer_logo img {
+  width: 100%;
+  display: block;
+}
+.web-credits-wrapper {
+  width: 24rem;
+}
+
+/* ---------- Títulos principales: sombra suave para separarlos del fondo ---------- */
+[data-lp-title] {
+  text-shadow: 0 0.04em 0.12em rgba(0, 0, 0, 0.45), 0 0.25em 1em rgba(0, 0, 0, 0.55);
+}
+
+/* ---------- Tienda (catálogo con filtros) ----------
+   La sección de la plantilla medía 100dvh fijo: ahora crece con el catálogo para que las
+   tarjetas queden adentro y no se superpongan con "Productos". */
+#tienda.section_sponsorguide,
+#tienda .container.is-sponsor,
+#tienda .padding-section-xlarge,
+#tienda .sponsorguide_wrapper {
+  height: auto;
+}
+#tienda .padding-section-xlarge {
+  /* Espacio extra arriba para que el título no quede debajo de la bandera a cuadros de la Agenda.
+     Solo desplaza la sección hacia abajo: Productos y Contacto mantienen sus distancias. */
+  padding-top: calc(var(--padding-section--xlarge) + 10rem);
+  padding-bottom: 3.5rem;
+}
+.lp-shop-container {
+  position: relative;
+  z-index: 1;
+}
+.lp-shop {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 1.75rem;
+  padding-bottom: 7rem;
+  font-family: var(--_typography---fonts--primary-font);
+}
+.lp-sr {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+.lp-shop__label {
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.3em;
+  color: var(--lp-gris-texto);
+  flex: none;
+  min-width: 7.5rem;
+}
+.lp-shop__toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem;
+  background: var(--lp-grafito-2);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 0.9rem;
+}
+.lp-shop__search {
+  position: relative;
+  flex: 1 1 20rem;
+  color: var(--lp-gris-texto);
+}
+.lp-shop__search svg {
+  position: absolute;
+  left: 1.1rem;
+  top: 50%;
+  width: 1.1rem;
+  height: 1.1rem;
+  transform: translateY(-50%);
+  pointer-events: none;
+}
+.lp-shop__search input,
+.lp-shop__sort select {
+  width: 100%;
+  font: inherit;
+  font-size: 0.95rem;
+  color: var(--lp-blanco);
+  background: var(--lp-grafito);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 999px;
+  padding: 0.9rem 1.2rem 0.9rem 3rem;
+  outline: none;
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+.lp-shop__search input::placeholder {
+  color: rgba(255, 255, 255, 0.4);
+}
+.lp-shop__search input:focus,
+.lp-shop__sort select:focus {
+  border-color: var(--lp-verde);
+  box-shadow: 0 0 0 3px rgba(154, 236, 63, 0.15);
+}
+.lp-shop__sort {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex: 0 1 auto;
+}
+.lp-shop__sort .lp-shop__label {
+  min-width: 0;
+}
+.lp-shop__sort select {
+  appearance: none;
+  -webkit-appearance: none;
+  padding: 0.9rem 2.8rem 0.9rem 1.2rem;
+  cursor: pointer;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%239AEC3F' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 1.1rem center;
+  background-size: 1rem;
+}
+.lp-shop__sort select option {
+  background: var(--lp-grafito-2);
+}
+.lp-shop__filters {
+  display: grid;
+  gap: 0.9rem;
+}
+.lp-shop > *,
+.lp-shop__group,
+.lp-chips {
+  min-width: 0;
+  max-width: 100%;
+}
+.lp-shop__group {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+/* La plantilla desatura todas las <img> (img { filter: saturate(0%) }):
+   logos, isotipo, íconos y fotos de producto van siempre a color de marca. */
+.lp-product__icon,
+.lp-product__img,
+.logo-wall_logo.is-icon,
+.lp-gauge__layer,
+.footer_logo img {
+  filter: none;
+}
+.lp-shop__group[hidden] {
+  display: none;
+}
+.lp-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+.lp-chip {
+  font: inherit;
+  font-size: 0.875rem;
+  color: var(--lp-blanco);
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 999px;
+  padding: 0.55rem 1.05rem;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+}
+.lp-chip:hover {
+  border-color: var(--lp-verde);
+}
+.lp-chip[aria-pressed="true"] {
+  background: var(--lp-verde);
+  border-color: var(--lp-verde);
+  color: var(--lp-grafito);
+}
+.lp-chip:focus-visible,
+.lp-product__cta:focus-visible,
+.lp-shop__clear:focus-visible {
+  outline: 2px solid var(--lp-verde);
+  outline-offset: 3px;
+}
+.lp-shop__status {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  color: var(--lp-gris-texto);
+  font-size: 0.9rem;
+}
+.lp-shop__status p {
+  margin: 0;
+}
+.lp-shop__clear {
+  font: inherit;
+  font-size: 0.9rem;
+  color: var(--lp-verde);
+  background: none;
+  border: 0;
+  padding: 0;
+  cursor: pointer;
+  text-decoration: underline;
+  text-underline-offset: 0.25em;
+}
+.lp-shop__clear.is-button {
+  text-decoration: none;
+  color: var(--lp-grafito);
+  background: var(--lp-verde);
+  border-radius: 999px;
+  padding: 0.75rem 1.4rem;
+  margin-top: 0.5rem;
+}
+.lp-shop__grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 1.25rem;
+}
+.lp-product {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  background: var(--lp-grafito-2);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 0.9rem;
+  transition: transform 0.5s cubic-bezier(0.19, 1, 0.22, 1), border-color 0.5s;
+}
+/* Línea de luz verde (recurso gráfico del manual) */
+.lp-product::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 3px;
+  background: var(--lp-verde);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.6s cubic-bezier(0.19, 1, 0.22, 1);
+}
+@media (hover: hover) {
+  .lp-product:hover {
+    transform: translateY(-4px);
+    border-color: rgba(154, 236, 63, 0.35);
+  }
+  .lp-product:hover::after {
+    transform: scaleX(1);
+  }
+}
+.lp-product__media {
+  position: relative;
+  display: grid;
+  place-items: center;
+  aspect-ratio: 4 / 3;
+  background: radial-gradient(circle at 50% 45%, rgba(154, 236, 63, 0.09), rgba(154, 236, 63, 0) 62%), #1f1f1f;
+}
+.lp-product__icon {
+  width: 30%;
+  height: auto;
+}
+.lp-product__img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  padding: 1rem;
+}
+.lp-product__top {
+  position: absolute;
+  top: 0.8rem;
+  left: 0.8rem;
+  font-family: var(--_typography---fonts--heading-font);
+  font-size: 1.3rem;
+  line-height: 1;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  color: var(--lp-grafito);
+  background: var(--lp-verde);
+  border-radius: 0.3rem;
+  padding: 0.3rem 0.5rem 0.2rem;
+}
+.lp-product__cat {
+  position: absolute;
+  top: 0.95rem;
+  right: 0.9rem;
+  font-size: 0.65rem;
+  text-transform: uppercase;
+  letter-spacing: 0.25em;
+  color: var(--lp-gris-texto);
+}
+.lp-product__body {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  flex: 1;
+  padding: 1.1rem 1.1rem 1.25rem;
+}
+.lp-product__name {
+  margin: 0;
+  font-family: var(--_typography---fonts--primary-font);
+  font-size: 1.05rem;
+  font-weight: 400;
+  line-height: 1.25;
+  text-transform: none;
+  color: var(--lp-blanco);
+}
+.lp-product__meta {
+  margin: 0;
+  font-size: 0.8rem;
+  line-height: 1.4;
+  color: var(--lp-gris-texto);
+}
+.lp-product__foot {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 0.75rem;
+  margin-top: auto;
+  padding-top: 0.9rem;
+}
+.lp-product__price {
+  margin: 0;
+  font-family: var(--_typography---fonts--heading-font);
+  font-size: 2.2rem;
+  line-height: 0.9;
+  color: var(--lp-blanco);
+}
+.lp-product__cta {
+  flex: none;
+  font-size: 0.8rem;
+  color: var(--lp-grafito);
+  background: var(--lp-verde);
+  border-radius: 999px;
+  padding: 0.6rem 1rem;
+  text-decoration: none;
+  transition: transform 0.3s;
+}
+.lp-product__cta:hover {
+  transform: scale(1.05);
+}
+.lp-shop__empty {
+  display: grid;
+  justify-items: center;
+  gap: 0.4rem;
+  text-align: center;
+  padding: 3rem 1rem;
+  color: var(--lp-gris-texto);
+  border: 1px dashed rgba(255, 255, 255, 0.12);
+  border-radius: 0.9rem;
+}
+.lp-shop__empty[hidden] {
+  display: none;
+}
+.lp-shop__empty p {
+  margin: 0;
+}
+.lp-shop__empty-title {
+  font-family: var(--_typography---fonts--heading-font);
+  font-size: 2.2rem;
+  text-transform: uppercase;
+  color: var(--lp-blanco);
+}
+@media (max-width: 991px) {
+  .lp-shop__grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+@media (max-width: 767px) {
+  .lp-shop__grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.75rem;
+  }
+  .lp-shop__group {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+  /* En celular, los chips se deslizan en una sola fila */
+  .lp-chips {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    max-width: 100%;
+    padding-bottom: 0.25rem;
+    scrollbar-width: none;
+  }
+  .lp-chips::-webkit-scrollbar {
+    display: none;
+  }
+  .lp-shop__sort {
+    width: 100%;
+  }
+  .lp-shop__sort select {
+    flex: 1;
+  }
+  .lp-product__body {
+    padding: 0.85rem;
+  }
+  .lp-product__price {
+    font-size: 1.8rem;
+  }
+  .lp-product__foot {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+/* ---------- Servicios técnicos: filas que abren el turnero ---------- */
+.lp-services-cta {
+  display: flex;
+  justify-content: center;
+  margin-top: 2rem;
+}
+[data-lp-book].agenda_item {
+  cursor: pointer;
+}
+/* El auto de la agenda pasa POR ENCIMA de títulos, filas y botón (sigue sin bloquear el mouse) */
+.section_agenda .agenda_sticky_wrapper {
+  z-index: 5;
+}
+/* Resaltado verde de cada fila al pasar el mouse (antes lo activaba el scroll) */
+@media (hover: hover) and (pointer: fine) {
+  [data-lp-book].agenda_item {
+    transition: color 0.6s cubic-bezier(0.45, 0, 0.55, 1);
+  }
+  [data-lp-book].agenda_item .agenda_line {
+    transition: background-color 0.6s cubic-bezier(0.45, 0, 0.55, 1);
+  }
+  [data-lp-book].agenda_item:hover {
+    color: var(--lp-verde);
+    transition-duration: 0.2s;
+    transition-timing-function: ease-out;
+  }
+  [data-lp-book].agenda_item:hover .agenda_line {
+    background-color: var(--lp-verde);
+    transition-duration: 0.2s;
+    transition-timing-function: ease-out;
+  }
+}
+.lp-agenda-book {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4em;
+  white-space: nowrap;
+}
+.lp-agenda-book svg {
+  width: 0.7em;
+  height: 0.7em;
+  transition: transform 0.4s cubic-bezier(0.19, 1, 0.22, 1);
+}
+@media (hover: hover) {
+  [data-lp-book].agenda_item:hover .lp-agenda-book svg {
+    transform: translateX(0.3em);
+  }
+}
+
+/* ---------- Turnero (modal "Agendá tu consulta") ---------- */
+.lp-book {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: grid;
+  place-items: center;
+  padding: 1.25rem;
+  font-family: var(--_typography---fonts--primary-font);
+}
+.lp-book[hidden] {
+  display: none;
+}
+.lp-book__backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(10, 10, 10, 0.72);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+}
+.lp-book__panel {
+  position: relative;
+  width: min(34rem, 100%);
+  max-height: calc(100dvh - 2.5rem);
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  display: grid;
+  gap: 1.4rem;
+  padding: 2rem;
+  color: var(--lp-blanco);
+  background: var(--lp-grafito-2);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-top: 3px solid var(--lp-verde);
+  border-radius: 1rem;
+  box-shadow: 0 2rem 4rem rgba(0, 0, 0, 0.55);
+}
+.lp-book__close {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  width: 2.5rem;
+  height: 2.5rem;
+  display: grid;
+  place-items: center;
+  color: var(--lp-blanco);
+  background: rgba(255, 255, 255, 0.06);
+  border: 0;
+  border-radius: 999px;
+  cursor: pointer;
+}
+.lp-book__close svg {
+  width: 1.1rem;
+  height: 1.1rem;
+}
+.lp-book__eyebrow {
+  margin: 0;
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.3em;
+  color: var(--lp-verde);
+}
+.lp-book__title {
+  margin: -0.8rem 0 0;
+  font-family: var(--_typography---fonts--heading-font);
+  font-size: 3.4rem;
+  line-height: 0.9;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+.lp-book__step {
+  display: grid;
+  gap: 0.7rem;
+}
+.lp-book__label {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  margin: 0;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.25em;
+  color: var(--lp-gris-texto);
+}
+.lp-book__label > span {
+  display: grid;
+  place-items: center;
+  width: 1.5rem;
+  height: 1.5rem;
+  font-size: 0.75rem;
+  letter-spacing: 0;
+  color: var(--lp-grafito);
+  background: var(--lp-verde);
+  border-radius: 999px;
+}
+.lp-book__label em {
+  font-style: normal;
+  text-transform: none;
+  letter-spacing: 0;
+}
+.lp-book__services {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+}
+.lp-book__cal {
+  padding: 1rem;
+  background: var(--lp-grafito);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 0.8rem;
+}
+.lp-book__cal-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.75rem;
+}
+.lp-book__month {
+  margin: 0;
+  font-size: 1rem;
+}
+.lp-book__nav {
+  width: 2.2rem;
+  height: 2.2rem;
+  font-size: 1.3rem;
+  line-height: 1;
+  color: var(--lp-blanco);
+  background: rgba(255, 255, 255, 0.06);
+  border: 0;
+  border-radius: 999px;
+  cursor: pointer;
+}
+.lp-book__nav:disabled {
+  opacity: 0.25;
+  cursor: default;
+}
+.lp-book__weekdays,
+.lp-book__days {
+  display: grid;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+  gap: 0.3rem;
+  text-align: center;
+}
+.lp-book__weekdays span {
+  font-size: 0.7rem;
+  color: var(--lp-gris-texto);
+  padding-bottom: 0.3rem;
+}
+.lp-book__day,
+.lp-book__time {
+  font: inherit;
+  font-size: 0.9rem;
+  color: var(--lp-blanco);
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  transition: background-color 0.25s, border-color 0.25s, color 0.25s;
+}
+.lp-book__day {
+  aspect-ratio: 1;
+}
+.lp-book__day.is-today {
+  border-color: rgba(154, 236, 63, 0.4);
+}
+.lp-book__day:not(:disabled):hover,
+.lp-book__time:not(:disabled):hover {
+  border-color: var(--lp-verde);
+}
+.lp-book__day[aria-pressed="true"],
+.lp-book__time[aria-pressed="true"] {
+  color: var(--lp-grafito);
+  background: var(--lp-verde);
+  border-color: var(--lp-verde);
+}
+.lp-book__day:disabled,
+.lp-book__time:disabled {
+  color: rgba(255, 255, 255, 0.2);
+  cursor: default;
+}
+.lp-book__time:disabled {
+  text-decoration: line-through;
+}
+.lp-book__times {
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  gap: 0.4rem;
+}
+.lp-book__time {
+  padding: 0.55rem 0;
+  border-color: rgba(255, 255, 255, 0.12);
+}
+.lp-book__hint {
+  grid-column: 1 / -1;
+  margin: 0;
+  font-size: 0.85rem;
+  color: var(--lp-gris-texto);
+}
+.lp-book__name input {
+  font: inherit;
+  font-size: 0.95rem;
+  color: var(--lp-blanco);
+  background: var(--lp-grafito);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 999px;
+  padding: 0.85rem 1.2rem;
+  outline: none;
+}
+.lp-book__name input:focus {
+  border-color: var(--lp-verde);
+}
+.lp-book__footer {
+  display: grid;
+  gap: 0.9rem;
+  padding-top: 1.2rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+.lp-book__summary {
+  margin: 0;
+  font-size: 0.9rem;
+  line-height: 1.4;
+  color: var(--lp-gris-texto);
+}
+.lp-book__summary strong {
+  color: var(--lp-blanco);
+  font-weight: 400;
+}
+.lp-book__confirm {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  font: inherit;
+  font-size: 1rem;
+  color: var(--lp-grafito);
+  background: var(--lp-verde);
+  border: 0;
+  border-radius: 999px;
+  padding: 1rem 1.4rem;
+  cursor: pointer;
+  transition: transform 0.3s, opacity 0.3s;
+}
+.lp-book__confirm svg {
+  width: 1.2rem;
+  height: 1.2rem;
+}
+.lp-book__confirm:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+.lp-book__confirm:not(:disabled):hover {
+  transform: scale(1.02);
+}
+.lp-book button:focus-visible,
+.lp-book input:focus-visible {
+  outline: 2px solid var(--lp-verde);
+  outline-offset: 2px;
+}
+@media (max-width: 767px) {
+  .lp-book {
+    padding: 0;
+    place-items: end stretch;
+  }
+  .lp-book__panel {
+    width: 100%;
+    max-height: 92dvh;
+    padding: 1.5rem 1.25rem 1.75rem;
+    border-radius: 1rem 1rem 0 0;
+  }
+  .lp-book__title {
+    font-size: 2.8rem;
+  }
+  .lp-book__times {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
+/* ---------- Carrito (solo en la sección Tienda) ---------- */
+.lp-product__cta {
+  font-family: inherit;
+  line-height: 1.2;
+  white-space: nowrap;
+  border: 1px solid var(--lp-verde);
+  cursor: pointer;
+}
+.lp-product__cta.is-added {
+  color: var(--lp-verde);
+  background: transparent;
+}
+.lp-shop__cart {
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  font: inherit;
+  font-size: 0.95rem;
+  color: var(--lp-grafito);
+  background: var(--lp-verde);
+  border: 0;
+  border-radius: 999px;
+  padding: 0.85rem 1.2rem;
+  cursor: pointer;
+}
+.lp-shop__cart svg {
+  width: 1.15rem;
+  height: 1.15rem;
+}
+.lp-cart-count {
+  display: inline-grid;
+  place-items: center;
+  min-width: 1.35rem;
+  height: 1.35rem;
+  padding: 0 0.35rem;
+  font-size: 0.75rem;
+  line-height: 1;
+  color: var(--lp-verde);
+  background: var(--lp-grafito);
+  border-radius: 999px;
+}
+.lp-cart-count[hidden] {
+  display: none;
+}
+.lp-cart-fab {
+  position: fixed;
+  right: 1.5rem;
+  bottom: 1.5rem;
+  z-index: 900;
+  display: grid;
+  place-items: center;
+  width: 3.75rem;
+  height: 3.75rem;
+  color: var(--lp-grafito);
+  background: var(--lp-verde);
+  border: 0;
+  border-radius: 999px;
+  box-shadow: 0 0.75rem 2rem rgba(0, 0, 0, 0.45);
+  cursor: pointer;
+  opacity: 0;
+  visibility: hidden;
+  translate: 0 1rem;
+  transition: opacity 0.4s, translate 0.5s cubic-bezier(0.19, 1, 0.22, 1), visibility 0.4s;
+}
+.lp-cart-fab.is-visible {
+  opacity: 1;
+  visibility: visible;
+  translate: 0 0;
+}
+.lp-cart-fab svg {
+  width: 1.5rem;
+  height: 1.5rem;
+}
+.lp-cart-fab .lp-cart-count {
+  position: absolute;
+  top: -0.2rem;
+  right: -0.2rem;
+  color: var(--lp-grafito);
+  background: var(--lp-blanco);
+}
+.lp-cart {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  font-family: var(--_typography---fonts--primary-font);
+}
+.lp-cart[hidden] {
+  display: none;
+}
+.lp-cart__backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(10, 10, 10, 0.72);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+}
+.lp-cart__panel {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  flex-direction: column;
+  width: min(28rem, 100%);
+  color: var(--lp-blanco);
+  background: var(--lp-grafito-2);
+  border-left: 3px solid var(--lp-verde);
+  box-shadow: -2rem 0 4rem rgba(0, 0, 0, 0.5);
+}
+.lp-cart__head {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 1rem;
+  padding: 1.75rem 1.5rem 1.25rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+.lp-cart__eyebrow {
+  margin: 0;
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.3em;
+  color: var(--lp-verde);
+}
+.lp-cart__title {
+  margin: 0.35rem 0 0;
+  font-family: var(--_typography---fonts--heading-font);
+  font-size: 3.2rem;
+  font-weight: 600;
+  line-height: 0.9;
+  text-transform: uppercase;
+}
+.lp-cart__close {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  color: var(--lp-blanco);
+  background: rgba(255, 255, 255, 0.06);
+  border: 0;
+  border-radius: 999px;
+  cursor: pointer;
+}
+.lp-cart__close svg {
+  width: 1.1rem;
+  height: 1.1rem;
+}
+.lp-cart__body {
+  flex: 1;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  padding: 0.5rem 1.5rem;
+}
+.lp-cart__item {
+  display: grid;
+  grid-template-columns: 4rem minmax(0, 1fr) auto;
+  gap: 1rem;
+  align-items: start;
+  padding: 1.1rem 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+.lp-cart__thumb {
+  display: grid;
+  place-items: center;
+  width: 4rem;
+  aspect-ratio: 1;
+  border-radius: 0.6rem;
+  background: radial-gradient(circle at 50% 45%, rgba(154, 236, 63, 0.1), rgba(154, 236, 63, 0) 65%), #1f1f1f;
+}
+.lp-cart__icon {
+  width: 55%;
+  filter: none;
+}
+.lp-cart__img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  filter: none;
+}
+.lp-cart__name-p {
+  margin: 0;
+  font-size: 0.95rem;
+  line-height: 1.25;
+}
+.lp-cart__meta {
+  margin: 0.2rem 0 0;
+  font-size: 0.75rem;
+  color: var(--lp-gris-texto);
+}
+.lp-cart__row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.75rem;
+  margin-top: 0.7rem;
+}
+.lp-cart__stepper {
+  display: inline-flex;
+  align-items: center;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 999px;
+}
+.lp-cart__stepper button {
+  width: 2rem;
+  height: 2rem;
+  font: inherit;
+  font-size: 1.1rem;
+  color: var(--lp-blanco);
+  background: none;
+  border: 0;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: color 0.2s;
+}
+.lp-cart__stepper button:hover {
+  color: var(--lp-verde);
+}
+.lp-cart__stepper span {
+  min-width: 1.6rem;
+  font-size: 0.9rem;
+  text-align: center;
+}
+.lp-cart__subtotal {
+  font-family: var(--_typography---fonts--heading-font);
+  font-size: 1.6rem;
+  font-weight: 600;
+  line-height: 0.9;
+}
+.lp-cart__remove {
+  display: grid;
+  place-items: center;
+  width: 2rem;
+  height: 2rem;
+  color: var(--lp-gris-texto);
+  background: none;
+  border: 0;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: color 0.2s;
+}
+.lp-cart__remove:hover {
+  color: var(--lp-blanco);
+}
+.lp-cart__remove svg {
+  width: 1rem;
+  height: 1rem;
+}
+.lp-cart__emptystate {
+  display: grid;
+  justify-items: center;
+  gap: 0.5rem;
+  padding: 4rem 1rem;
+  text-align: center;
+  color: var(--lp-gris-texto);
+}
+.lp-cart__emptystate p {
+  margin: 0;
+}
+.lp-cart__emptystate svg {
+  width: 2.5rem;
+  height: 2.5rem;
+  color: var(--lp-verde);
+}
+.lp-cart__empty-title {
+  font-family: var(--_typography---fonts--heading-font);
+  font-size: 2.4rem;
+  text-transform: uppercase;
+  color: var(--lp-blanco);
+}
+.lp-cart__foot {
+  display: grid;
+  gap: 1rem;
+  padding: 1.25rem 1.5rem 1.5rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+.lp-cart__foot[hidden] {
+  display: none;
+}
+.lp-cart__label {
+  display: block;
+  margin: 0 0 0.5rem;
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.25em;
+  color: var(--lp-gris-texto);
+}
+.lp-cart__label em {
+  font-style: normal;
+  text-transform: none;
+  letter-spacing: 0;
+}
+.lp-cart .lp-chips {
+  flex-wrap: wrap;
+}
+.lp-cart__name input {
+  width: 100%;
+  font: inherit;
+  font-size: 0.95rem;
+  color: var(--lp-blanco);
+  background: var(--lp-grafito);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 999px;
+  padding: 0.85rem 1.2rem;
+  outline: none;
+}
+.lp-cart__name input:focus {
+  border-color: var(--lp-verde);
+}
+.lp-cart__total {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+}
+.lp-cart__total span {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.25em;
+  color: var(--lp-gris-texto);
+}
+.lp-cart__total strong {
+  font-family: var(--_typography---fonts--heading-font);
+  font-size: 2.6rem;
+  font-weight: 600;
+  line-height: 0.9;
+}
+.lp-cart__note {
+  margin: -0.4rem 0 0;
+  font-size: 0.8rem;
+  color: var(--lp-gris-texto);
+}
+.lp-cart__checkout {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  font: inherit;
+  font-size: 1rem;
+  color: var(--lp-grafito);
+  background: var(--lp-verde);
+  border: 0;
+  border-radius: 999px;
+  padding: 1rem 1.4rem;
+  cursor: pointer;
+  transition: transform 0.3s;
+}
+.lp-cart__checkout:hover {
+  transform: scale(1.02);
+}
+.lp-cart__checkout svg {
+  width: 1.2rem;
+  height: 1.2rem;
+}
+.lp-cart__empty-btn {
+  justify-self: center;
+}
+.lp-cart button:focus-visible,
+.lp-cart input:focus-visible,
+.lp-cart-fab:focus-visible,
+.lp-shop__cart:focus-visible {
+  outline: 2px solid var(--lp-verde);
+  outline-offset: 2px;
+}
+@media (max-width: 767px) {
+  .lp-shop__cart {
+    width: 100%;
+    justify-content: center;
+  }
+  .lp-cart-fab {
+    right: 1rem;
+    bottom: 1rem;
+  }
+  .lp-cart__title {
+    font-size: 2.6rem;
+  }
+}
+
+/* ---------- Muro de marcas ----------
+   Los logos vienen en su color original (muchos son negros y no se verían sobre grafito):
+   se muestran en blanco monocromo y recuperan su color al pasar el mouse. */
+.logo-wall_logo {
+  filter: brightness(0) invert(1);
+  opacity: 0.75;
+  transition: opacity 0.4s cubic-bezier(0.19, 1, 0.22, 1), filter 0.4s cubic-bezier(0.19, 1, 0.22, 1);
+}
+@media (hover: hover) and (pointer: fine) {
+  .logo-wall_card:hover .logo-wall_logo {
+    filter: none;
+    opacity: 1;
+  }
+}
+
+/* El pedido no se envía hasta completar nombre y apellido */
+.lp-cart__checkout:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+
+/* Shell es el único logo vertical y se veía chico: su tarjeta se hace más alta (la fila crece
+   sola, sin pisar a las vecinas) y el logo la llena. El gris y el color al pasar el mouse salen
+   de la regla general. */
+.logo-wall_card:has(.logo-wall_logo.is-shell) {
+  aspect-ratio: auto;
+  height: 3.4cm;
+  padding: 0.25rem;
+}
+.logo-wall_logo.is-shell {
+  height: 100%;
+  width: auto;
+  max-width: 100%;
+}
+@media (max-width: 767px) {
+  /* En celular las tarjetas son chicas: vuelve a la medida de las demás */
+  .logo-wall_card:has(.logo-wall_logo.is-shell) {
+    aspect-ratio: 1;
+    height: auto;
+  }
+  .logo-wall_logo.is-shell {
+    width: 100%;
+  }
+}
+
+/* Fotos reales de productos */
+.lp-product__media { aspect-ratio: 1 / 1; }
+.lp-product__img { padding: 0; object-fit: cover; }          /* el producto llena la tarjeta */
+.lp-product { display: flex; flex-direction: column; }
+.lp-product__body { flex: 1; display: flex; flex-direction: column; }
+.lp-product__foot { margin-top: auto; }                       /* precios siempre alineados */
+.lp-product__cat {                                            /* legible sobre cualquier foto */
+  background: rgba(26, 26, 26, .72);
+  padding: .25rem .5rem;
+  border-radius: 999px;
+  backdrop-filter: blur(4px);
+}
+
+/* Carrusel de más vendidos: fotos reales (a color) con el nombre del producto */
+.radial_card { position: relative; }
+.radial_card .image { filter: none; object-fit: cover; }
+.lp-radial-nombre {
+  position: absolute;
+  left: .5rem; right: .5rem; bottom: .5rem;
+  margin: 0;
+  padding: .4rem .55rem;
+  border-radius: 8px;
+  background: rgba(26, 26, 26, .8);
+  color: var(--blanco, #fff);
+  font-size: .72rem;
+  line-height: 1.25;
+  text-align: center;
+  backdrop-filter: blur(5px);
+}
+
+/* ---------------------------------------------------------------------------
+   Celular: recuperar el detalle visual que la plantilla apagaba.
+   (En PC no cambia nada: todo esto vive dentro de media queries de celular.) */
+@media screen and (max-width: 767px) {
+  /* Los textos gigantes de fondo: ocupan la sección como en PC.
+     A tamaño natural quedaban de ~110 px y, con el 5% de opacidad de la plantilla,
+     no se veían; estirados llenan la sección igual que en pantalla grande. */
+  .bg_text_svg {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    min-height: 16rem;
+    max-height: 30rem;   /* en secciones largas las letras no se estiran de más */
+  }
+  /* La bandera a cuadros: en PC se dibuja a ~1440 px y cada cuadro mide ~38 px.
+     En un celular se achicaría a 10 px y con 5% de opacidad no se ve: la dibujamos
+     al mismo ancho y el sobrante se recorta (el contenedor tiene overflow hidden). */
+  .bg_finish {
+    width: 1450px;
+    max-width: none;
+    flex: none;
+  }
+  /* La bandera cuelga por debajo de la agenda (bottom: -14rem) y cae justo sobre la
+     sección de marcas, que en celular tiene z-index 3 y la tapaba por completo.
+     La traemos adentro de la agenda y sin fondo sólido, para no pisar el contenido. */
+  .bg_finish_wrapper {
+    overflow: hidden;
+    bottom: 0;
+    background: transparent;
+    pointer-events: none;
+  }
+  .bg_text_wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+  }
+  .bg_text_wrapper.is-gallery {
+    bottom: 9rem;
+  }
+}
+
+@media screen and (max-width: 479px) {
+  /* Las líneas de pista de la sección de marcas */
+  .bg_lines_wrapper.is-sponsorguide {
+    display: block;
+  }
+}
+
+/* Crédito de autoría en el pie */
+.lp-credito {
+  margin: 0;
+  padding: 1.5rem var(--padding-global--regular, 1.5rem) 0;
+  text-align: center;
+  font-size: .85rem;
+  letter-spacing: .02em;
+  color: var(--lp-gris, #8A8A8A);
+}
+.lp-credito a {
+  color: var(--lp-verde, #9AEC3F);
+  text-decoration: none;
+  border-bottom: 1px solid rgba(154, 236, 63, .35);
+  transition: border-color .25s ease, color .25s ease;
+}
+.lp-credito a:hover,
+.lp-credito a:focus-visible {
+  border-bottom-color: var(--lp-verde, #9AEC3F);
+}
+
+/* El crédito va en la línea de abajo del footer, entre el © y los términos */
+.footer_bottom { flex-wrap: wrap; gap: .75rem 1.5rem; align-items: baseline; }
+.lp-credito { padding: 0; }
+@media screen and (max-width: 767px) {
+  .lp-credito { flex: 1 0 100%; order: 1; text-align: center; padding-top: .5rem; }
+}

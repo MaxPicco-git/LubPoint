@@ -1,0 +1,22 @@
+{
+  // LUBPOINT · Sistema. Desplegar con: npx wrangler deploy
+  "name": "lubpoint-sistema",
+  "main": "src/index.js",
+  "compatibility_date": "2026-09-01",
+  "assets": { "directory": "./panel", "binding": "ASSETS" },
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "lubpoint",
+      "database_id": "PEGAR_ACA_EL_ID_QUE_DEVUELVE_WRANGLER"
+    }
+  ],
+  // Direcciones desde las que se puede usar el PANEL (separadas por coma).
+  // Poné acá la dirección de tu web cuando la publiques.
+  "vars": { "SITIO": "https://lubpoint.pages.dev" },
+  "triggers": {
+    // Cada 10 minutos libera las reservas vencidas, aunque nadie tenga el panel abierto
+    "crons": ["*/10 * * * *"]
+  },
+  "observability": { "enabled": true }
+}
