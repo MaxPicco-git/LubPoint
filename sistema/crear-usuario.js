@@ -53,7 +53,7 @@ try {
   // shell: true es necesario en Windows para invocar npx.cmd; el SQL ya viaja en un archivo,
   // así que acá no hay comillas que se puedan romper.
   execFileSync(npx, ["wrangler", "d1", "execute", "lubpoint", destino, "-y", "--file", JSON.stringify(temporal)],
-    { stdio: ["ignore", "pipe", "pipe"], shell: true });
+    { stdio: ["ignore", "pipe", "pipe"], shell: true, cwd: __dirname });
   console.log(`Usuario "${usuario.toLowerCase()}" creado (${rol}) en la base ${publicar ? "publicada" : "local"}.`);
 } catch (e) {
   const salida = String(e.stdout || "") + String(e.stderr || "");
