@@ -252,7 +252,6 @@
         ${media(p, "lp-product")}
         <button type="button" class="lp-product__ver" data-lp-ver="${esc(p.id)}"
           aria-label="Ver detalles de ${esc(p.nombre)}">
-          ${patronHTML()}
           <span class="lp-product__ver-texto">Ver producto</span>
         </button>
       </div>

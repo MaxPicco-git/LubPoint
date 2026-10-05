@@ -1623,9 +1623,8 @@ body {
   from { transform: translate3d(0, 0, 0); }
   to   { transform: translate3d(-25%, 0, 0); }
 }
-@media (prefers-reduced-motion: reduce) {
-  .lp-patron__pista { animation: none; }
-}
+/* El desplazamiento es parte del diseño de la ficha y no se detiene:
+   es un movimiento lento y constante, sin parpadeos ni saltos. */
 
 /* ---------------------------------------------------------------- Hover de la tarjeta */
 .lp-product__ver {
@@ -1637,7 +1636,8 @@ body {
   border: 0;
   padding: 0;
   cursor: pointer;
-  background: var(--lp-grafito, #1A1A1A);
+  /* El producto siempre se ve: solo un velo suave de abajo hacia arriba */
+  background: linear-gradient(180deg, rgba(26, 26, 26, 0) 35%, rgba(26, 26, 26, .72) 100%);
   opacity: 0;
   visibility: hidden;
   transition: opacity .38s ease, visibility .38s ease;
@@ -1648,16 +1648,12 @@ body {
   opacity: 1;
   visibility: visible;
 }
-.lp-product__ver::after {            /* vela el patrón para que el texto se lea */
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: rgba(26, 26, 26, .55);
-  z-index: 1;
-}
+
 .lp-product__ver-texto {
   position: relative;
   z-index: 2;
+  align-self: end;
+  margin-bottom: 1.1rem;
   padding: .7rem 1.4rem;
   border: 1px solid var(--lp-verde, #9AEC3F);
   border-radius: 999px;
@@ -1724,12 +1720,12 @@ body {
   display: grid;
   place-items: center;
   height: 100%;
-  padding: clamp(1rem, 3vw, 2.2rem);
 }
 .lp-ficha__cuadro img {
-  max-width: 100%;
-  max-height: 100%;
-  object-fit: contain;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;      /* la foto llena el recuadro, sin bordes negros alrededor */
+  object-position: center;
   filter: none;
 }
 .lp-ficha__cuadro.is-sinfoto { gap: .8rem; align-content: center; }
@@ -1785,8 +1781,8 @@ body {
 .lp-ficha__info > .lp-patron { opacity: 1; }
 /* El patrón del archivo es muy tenue (5% de contraste): le levantamos el brillo por CSS,
    sin tocar la imagen ni redibujar el logo. */
-.lp-ficha__info .lp-patron img { filter: brightness(1.35); }
-.lp-product__ver .lp-patron img { filter: brightness(2.2); }
+.lp-ficha__info .lp-patron img { filter: brightness(0.6); }
+
 .lp-ficha__contenido {
   position: relative;
   z-index: 2;
@@ -1796,7 +1792,7 @@ body {
   min-height: 100%;
   padding: clamp(1.4rem, 3vw, 2.6rem);
   /* Apenas un velo: el patrón tiene que seguir viéndose detrás del texto */
-  background: linear-gradient(180deg, rgba(26, 26, 26, 0.30), rgba(26, 26, 26, 0.58));
+  background: linear-gradient(180deg, rgba(26, 26, 26, 0.42), rgba(26, 26, 26, 0.66));
 }
 .lp-ficha__cerrar {
   position: absolute;
