@@ -526,28 +526,55 @@
   ficha.innerHTML = `
     <div class="lp-ficha__fondo" data-lp-ficha-cerrar></div>
     <article class="lp-ficha__caja" role="dialog" aria-modal="true" aria-labelledby="lp-ficha-titulo">
-      ${patronHTML()}
-      <button type="button" class="lp-ficha__cerrar" data-lp-ficha-cerrar aria-label="Volver atrás">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12M18 6 6 18"/></svg>
-      </button>
-      <div class="lp-ficha__cuerpo">
-        <div class="lp-ficha__galeria">
-          <div class="lp-ficha__marco"><img class="lp-ficha__foto" src="" alt=""></div>
-          <div class="lp-ficha__miniaturas" data-lp-ficha-miniaturas></div>
+      <div class="lp-ficha__visor">
+        <div class="lp-ficha__pista" data-lp-ficha-pista></div>
+        <div class="lp-ficha__flechas" data-lp-ficha-flechas>
+          <button type="button" class="lp-ficha__flecha" data-lp-ficha-paso="-1" aria-label="Foto anterior">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M11 18l-6-6 6-6"/></svg>
+          </button>
+          <button type="button" class="lp-ficha__flecha" data-lp-ficha-paso="1" aria-label="Foto siguiente">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </button>
         </div>
-        <div class="lp-ficha__texto">
+        <p class="lp-ficha__contador" data-lp-ficha-contador></p>
+      </div>
+
+      <div class="lp-ficha__info">
+        ${patronHTML()}
+        <button type="button" class="lp-ficha__cerrar" data-lp-ficha-cerrar aria-label="Volver atrás">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12M18 6 6 18"/></svg>
+        </button>
+        <div class="lp-ficha__contenido">
           <p class="lp-ficha__cat" data-lp-ficha-cat></p>
           <h2 class="lp-ficha__titulo" id="lp-ficha-titulo" data-lp-ficha-nombre></h2>
-          <p class="lp-ficha__desc" data-lp-ficha-desc></p>
-          <ul class="lp-ficha__detalles" data-lp-ficha-detalles></ul>
-          <div class="lp-ficha__pie">
-            <div>
-              <p class="lp-ficha__precio" data-lp-ficha-precio></p>
-              <p class="lp-ficha__stock" data-lp-ficha-stock></p>
-            </div>
-            <button type="button" class="lp-ficha__agregar" data-lp-ficha-agregar></button>
+          <p class="lp-ficha__bajada" data-lp-ficha-bajada></p>
+
+          <div class="lp-ficha__tarjetas">
+            <section class="lp-ficha__tarjeta">
+              <h3>Cómo es</h3>
+              <ul data-lp-ficha-detalles></ul>
+            </section>
+            <section class="lp-ficha__tarjeta">
+              <h3>Va bien con</h3>
+              <p data-lp-ficha-con></p>
+            </section>
           </div>
-          <button type="button" class="lp-ficha__volver" data-lp-ficha-cerrar>Volver a la tienda</button>
+
+          <div class="lp-ficha__compra">
+            <div class="lp-ficha__cantidad">
+              <span data-lp-ficha-unidades>1 unidad</span>
+              <div class="lp-ficha__pasos">
+                <button type="button" data-lp-ficha-cant="-1" aria-label="Quitar una unidad">−</button>
+                <strong data-lp-ficha-numero>1</strong>
+                <button type="button" data-lp-ficha-cant="1" aria-label="Sumar una unidad">+</button>
+              </div>
+            </div>
+            <button type="button" class="lp-ficha__agregar" data-lp-ficha-agregar>
+              <span data-lp-ficha-agregar-texto>Agregar</span>
+              <span class="lp-ficha__agregar-precio" data-lp-ficha-precio></span>
+            </button>
+          </div>
+          <p class="lp-ficha__stock" data-lp-ficha-stock></p>
         </div>
       </div>
     </article>`;
@@ -556,49 +583,72 @@
 
   let fichaProducto = null;
   let fichaFoco = null;
+  let fichaIndice = 0;
+  let fichaCantidad = 1;
+
+  function mostrarFoto(indice) {
+    const fotos = (fichaProducto && fichaProducto.fotos) || [];
+    if (!fotos.length) return;
+    fichaIndice = (indice + fotos.length) % fotos.length;   // da la vuelta en los extremos
+    F("[data-lp-ficha-pista]").style.transform = `translate3d(-${fichaIndice * 100}%, 0, 0)`;
+    F("[data-lp-ficha-contador]").textContent = fotos.length > 1 ? `${fichaIndice + 1} / ${fotos.length}` : "";
+  }
+
+  function pintarCantidad() {
+    const p = fichaProducto;
+    if (!p) return;
+    const tope = p.disponible != null ? Math.max(1, p.disponible) : 99;
+    fichaCantidad = Math.min(Math.max(1, fichaCantidad), tope);
+    F("[data-lp-ficha-numero]").textContent = fichaCantidad;
+    F("[data-lp-ficha-unidades]").textContent = fichaCantidad === 1 ? "1 unidad" : `${fichaCantidad} unidades`;
+    F("[data-lp-ficha-precio]").textContent = p.precio > 0 ? precio.format(p.precio * fichaCantidad) : "A consultar";
+  }
 
   function pintarFicha(p) {
     const datos = (window.LUBPOINT_FICHAS || {})[p.codigo] || {};
     const fotos = p.fotos && p.fotos.length ? p.fotos : [];
+
     F("[data-lp-ficha-cat]").textContent = p.categoria;
     F("[data-lp-ficha-nombre]").textContent = p.nombre;
-    F("[data-lp-ficha-desc]").textContent = datos.d || "Pasá por el local y te asesoramos sobre este producto.";
-    F("[data-lp-ficha-detalles]").innerHTML = (datos.det || [])
+    F("[data-lp-ficha-bajada]").textContent = datos.d || "Pasá por el local y te asesoramos.";
+    F("[data-lp-ficha-detalles]").innerHTML = (datos.det || [p.detalle].filter(Boolean))
       .map(x => `<li>${esc(x)}</li>`).join("");
-    F("[data-lp-ficha-precio]").textContent = p.precio > 0 ? precio.format(p.precio) : "Consultar precio";
-    F("[data-lp-ficha-stock]").textContent = p.disponible == null ? ""
-      : (p.disponible > 0 ? `${p.disponible} disponibles` : "Sin stock por ahora");
+    F("[data-lp-ficha-con]").textContent = datos.con || "Consultanos y te decimos qué le va mejor.";
 
-    // Si el producto todavía no tiene foto, mostramos el ícono de su categoría
-    const marco = F(".lp-ficha__marco");
-    marco.classList.toggle("sin-foto", !fotos.length);
-    marco.innerHTML = fotos.length
-      ? `<img class="lp-ficha__foto" src="${esc(fotos[0])}" alt="${esc(p.nombre)}">`
-      : `<img class="lp-ficha__icono" src="assets/icons/${iconoDe(p)}.svg" alt="">
-         <span class="lp-ficha__sinfoto">Foto en camino</span>`;
-    F("[data-lp-ficha-miniaturas]").innerHTML = fotos.length > 1
-      ? fotos.map((f, i) => `<button type="button" class="lp-ficha__mini${i === 0 ? " is-activa" : ""}" data-lp-ficha-foto="${esc(f)}">
-           <img src="${esc(f)}" alt="${esc(p.nombre)} · vista ${i + 1}" loading="lazy"></button>`).join("")
-      : "";
+    // Fotos: una al lado de la otra; las flechas desplazan la pista
+    F("[data-lp-ficha-pista]").innerHTML = fotos.length
+      ? fotos.map((f, n) => `<div class="lp-ficha__cuadro"><img src="${esc(f)}" alt="${esc(p.nombre)} · vista ${n + 1}"></div>`).join("")
+      : `<div class="lp-ficha__cuadro is-sinfoto">
+           <img class="lp-ficha__icono" src="assets/icons/${iconoDe(p)}.svg" alt="">
+           <span>Foto en camino</span>
+         </div>`;
+    F("[data-lp-ficha-flechas]").hidden = fotos.length < 2;
+
+    const stock = F("[data-lp-ficha-stock]");
+    stock.textContent = p.disponible == null ? ""
+      : (p.disponible > 0 ? `${p.disponible} disponibles en el local` : "Sin stock por ahora");
 
     const boton = F("[data-lp-ficha-agregar]");
-    boton.textContent = textoCta(p);
     boton.disabled = sinStock(p);
-    boton.classList.toggle("is-added", cart.qty(p.id) > 0);
+    F("[data-lp-ficha-agregar-texto]").textContent = sinStock(p) ? "Sin stock"
+      : (cart.qty(p.id) ? "Sumar al carrito" : "Agregar");
+    pintarCantidad();
   }
 
   function abrirFicha(id) {
     const p = byId[id];
     if (!p) return;
     fichaProducto = p;
+    fichaCantidad = 1;
     fichaFoco = document.activeElement;
     pintarFicha(p);
     ficha.hidden = false;
+    mostrarFoto(0);
     if (window.scrollLock) window.scrollLock.lock("ficha");
     if (anim) {
       gsap.fromTo(F(".lp-ficha__fondo"), { autoAlpha: 0 }, { autoAlpha: 1, duration: 0.35, ease: "power2.out" });
-      gsap.fromTo(F(".lp-ficha__caja"), { autoAlpha: 0, y: 28, scale: 0.98 },
-        { autoAlpha: 1, y: 0, scale: 1, duration: 0.5, ease: "expo.out" });
+      gsap.fromTo(F(".lp-ficha__caja"), { autoAlpha: 0, y: 26, scale: 0.985 },
+        { autoAlpha: 1, y: 0, scale: 1, duration: 0.55, ease: "expo.out" });
     }
     setTimeout(() => F(".lp-ficha__cerrar").focus(), 60);
   }
@@ -611,28 +661,34 @@
       fichaProducto = null;
     };
     if (anim) {
-      gsap.to(F(".lp-ficha__caja"), { autoAlpha: 0, y: 20, duration: 0.3, ease: "power2.in" });
+      gsap.to(F(".lp-ficha__caja"), { autoAlpha: 0, y: 18, duration: 0.3, ease: "power2.in" });
       gsap.to(F(".lp-ficha__fondo"), { autoAlpha: 0, duration: 0.3, ease: "power2.in", onComplete: listo });
     } else listo();
   }
 
   ficha.addEventListener("click", e => {
     if (e.target.closest("[data-lp-ficha-cerrar]")) return cerrarFicha();
-    const mini = e.target.closest("[data-lp-ficha-foto]");
-    if (mini) {
-      const grande = F(".lp-ficha__foto");
-      if (grande) grande.src = mini.dataset.lpFichaFoto;
-      ficha.querySelectorAll(".lp-ficha__mini").forEach(b => b.classList.toggle("is-activa", b === mini));
-      return;
-    }
+
+    const paso = e.target.closest("[data-lp-ficha-paso]");
+    if (paso) { mostrarFoto(fichaIndice + Number(paso.dataset.lpFichaPaso)); return; }
+
+    const cant = e.target.closest("[data-lp-ficha-cant]");
+    if (cant) { fichaCantidad += Number(cant.dataset.lpFichaCant); pintarCantidad(); return; }
+
     if (e.target.closest("[data-lp-ficha-agregar]") && fichaProducto && !sinStock(fichaProducto)) {
-      cart.add(fichaProducto.id);
-      pintarFicha(fichaProducto);
+      cart.set(fichaProducto.id, cart.qty(fichaProducto.id) + fichaCantidad);
       actualizarCarrito(true);
       sincronizarTarjetas();
+      pintarFicha(fichaProducto);
     }
   });
-  document.addEventListener("keydown", e => { if (e.key === "Escape" && !ficha.hidden) cerrarFicha(); });
+
+  document.addEventListener("keydown", e => {
+    if (ficha.hidden) return;
+    if (e.key === "Escape") cerrarFicha();
+    if (e.key === "ArrowLeft") mostrarFoto(fichaIndice - 1);
+    if (e.key === "ArrowRight") mostrarFoto(fichaIndice + 1);
+  });
 
   // El botón flotante del carrito solo aparece mientras la sección Tienda está en pantalla.
   const seccion = root.closest("section, [class^='section_']") || root;

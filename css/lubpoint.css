@@ -1673,58 +1673,147 @@ body {
   color: var(--lp-grafito, #1A1A1A);
 }
 
-/* ---------------------------------------------------------------- Ficha del producto */
+/* El atributo hidden tiene que ganarle al display de arriba (si no, la ficha queda visible vacía) */
+.lp-ficha[hidden],
+.lp-cart[hidden] { display: none !important; }
+
+/* ---------------------------------------------------------------- Ficha del producto
+   Formato partido: a la izquierda la foto grande con flechas para pasar los ángulos,
+   a la derecha los datos sobre el patrón en movimiento. */
 .lp-ficha {
   position: fixed;
   inset: 0;
   z-index: 70;
   display: grid;
   place-items: center;
-  padding: 1.25rem;
+  padding: clamp(.6rem, 2vw, 1.6rem);
 }
 .lp-ficha__fondo {
   position: absolute;
   inset: 0;
-  background: rgba(0, 0, 0, .78);
+  background: rgba(0, 0, 0, .8);
   backdrop-filter: blur(6px);
 }
 .lp-ficha__caja {
   position: relative;
-  width: min(1020px, 100%);
-  max-height: calc(100vh - 2.5rem);
-  overflow: hidden auto;
-  border: 1px solid rgba(255, 255, 255, .12);
-  border-top: 3px solid var(--lp-verde, #9AEC3F);
-  border-radius: 16px;
+  display: grid;
+  grid-template-columns: minmax(0, .82fr) minmax(0, 1fr);
+  width: min(1240px, 100%);
+  height: min(760px, calc(100vh - 2rem));
+  overflow: hidden;
+  border-radius: 22px;
   background: var(--lp-grafito, #1A1A1A);
-  box-shadow: 0 2rem 5rem rgba(0, 0, 0, .6);
+  box-shadow: 0 2rem 5rem rgba(0, 0, 0, .65);
 }
-.lp-ficha__caja > .lp-patron { opacity: .5; }
-.lp-ficha__cuerpo {
+
+/* ------------------------------ Izquierda: la foto */
+.lp-ficha__visor {
+  position: relative;
+  overflow: hidden;
+  border-radius: 22px;
+  /* casi el mismo negro que traen las fotos, para que no se note el borde de la imagen */
+  background: radial-gradient(circle at 50% 58%, rgba(154, 236, 63, .16), rgba(154, 236, 63, 0) 62%), #080808;
+}
+.lp-ficha__pista {
+  display: flex;
+  height: 100%;
+  transition: transform .55s cubic-bezier(.65, 0, .35, 1);
+}
+.lp-ficha__cuadro {
+  flex: 0 0 100%;
+  display: grid;
+  place-items: center;
+  height: 100%;
+  padding: clamp(1rem, 3vw, 2.2rem);
+}
+.lp-ficha__cuadro img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  filter: none;
+}
+.lp-ficha__cuadro.is-sinfoto { gap: .8rem; align-content: center; }
+.lp-ficha__cuadro.is-sinfoto span {
+  color: rgba(255, 255, 255, .45);
+  font-size: .78rem;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+}
+.lp-ficha__icono { width: 30%; opacity: .9; }
+
+.lp-ficha__flechas {
+  position: absolute;
+  top: 50%;
+  right: clamp(.7rem, 2vw, 1.4rem);
+  transform: translateY(-50%);
+  display: grid;
+  gap: .7rem;
+  z-index: 2;
+}
+.lp-ficha__flecha {
+  display: grid;
+  place-items: center;
+  width: 3.1rem;
+  height: 3.1rem;
+  padding: 0;
+  border: 0;
+  border-radius: 999px;
+  background: var(--lp-blanco, #fff);
+  color: var(--lp-grafito, #1A1A1A);
+  cursor: pointer;
+  transition: background-color .25s ease, transform .25s ease;
+}
+.lp-ficha__flecha svg { width: 1.15rem; height: 1.15rem; }
+.lp-ficha__flecha:hover { background: var(--lp-verde, #9AEC3F); transform: scale(1.06); }
+.lp-ficha__contador {
+  position: absolute;
+  left: 50%;
+  bottom: 1rem;
+  transform: translateX(-50%);
+  margin: 0;
+  color: rgba(255, 255, 255, .5);
+  font-size: .8rem;
+  letter-spacing: .1em;
+}
+
+/* ------------------------------ Derecha: los datos */
+.lp-ficha__info {
+  position: relative;
+  overflow: hidden auto;
+  background: var(--lp-grafito-2, #232323);
+}
+.lp-ficha__info > .lp-patron { opacity: 1; }
+/* El patrón del archivo es muy tenue (5% de contraste): le levantamos el brillo por CSS,
+   sin tocar la imagen ni redibujar el logo. */
+.lp-ficha__info .lp-patron img { filter: brightness(1.35); }
+.lp-product__ver .lp-patron img { filter: brightness(2.2); }
+.lp-ficha__contenido {
   position: relative;
   z-index: 2;
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr);
-  gap: 2rem;
-  padding: 2rem;
-  background: linear-gradient(180deg, rgba(26, 26, 26, .82), rgba(26, 26, 26, .94));
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  min-height: 100%;
+  padding: clamp(1.4rem, 3vw, 2.6rem);
+  /* Apenas un velo: el patrón tiene que seguir viéndose detrás del texto */
+  background: linear-gradient(180deg, rgba(26, 26, 26, 0.30), rgba(26, 26, 26, 0.58));
 }
 .lp-ficha__cerrar {
   position: absolute;
-  top: .9rem;
-  right: .9rem;
+  top: 1rem;
+  right: 1rem;
   z-index: 4;
   display: grid;
   place-items: center;
-  width: 2.6rem;
-  height: 2.6rem;
+  width: 2.7rem;
+  height: 2.7rem;
   padding: 0;
   border: 1px solid rgba(255, 255, 255, .18);
   border-radius: 999px;
-  background: rgba(26, 26, 26, .75);
+  background: rgba(26, 26, 26, .8);
   color: #fff;
   cursor: pointer;
-  transition: background-color .25s ease, border-color .25s ease, transform .25s ease;
+  transition: background-color .25s ease, color .25s ease, transform .25s ease;
 }
 .lp-ficha__cerrar svg { width: 1.1rem; height: 1.1rem; }
 .lp-ficha__cerrar:hover {
@@ -1734,122 +1823,123 @@ body {
   transform: rotate(90deg);
 }
 
-.lp-ficha__marco {
-  display: grid;
-  place-items: center;
-  aspect-ratio: 1 / 1;
-  overflow: hidden;
-  border: 1px solid rgba(255, 255, 255, .08);
-  border-radius: 12px;
-  background: #121212;
-}
-.lp-ficha__foto {
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-  filter: none;
-}
-.lp-ficha__miniaturas {
-  display: flex;
-  gap: .5rem;
-  margin-top: .7rem;
-  flex-wrap: wrap;
-}
-.lp-ficha__mini {
-  width: 4.4rem;
-  height: 4.4rem;
-  padding: 0;
-  overflow: hidden;
-  border: 1px solid rgba(255, 255, 255, .14);
-  border-radius: 10px;
-  background: #121212;
-  cursor: pointer;
-  transition: border-color .25s ease, transform .25s ease;
-}
-.lp-ficha__mini img { width: 100%; height: 100%; object-fit: contain; filter: none; }
-.lp-ficha__mini:hover { transform: translateY(-2px); }
-.lp-ficha__mini.is-activa { border-color: var(--lp-verde, #9AEC3F); }
-
-.lp-ficha__texto { display: flex; flex-direction: column; gap: .75rem; }
 .lp-ficha__cat {
   margin: 0;
   color: var(--lp-verde, #9AEC3F);
   font-size: .72rem;
-  letter-spacing: .18em;
+  letter-spacing: .2em;
   text-transform: uppercase;
 }
-.lp-ficha__titulo { margin: 0; line-height: .95; }
-.lp-ficha__desc { margin: 0; color: rgba(255, 255, 255, .8); }
-.lp-ficha__detalles {
-  margin: .2rem 0 0;
-  padding: 0;
-  list-style: none;
-  display: grid;
-  gap: .45rem;
+.lp-ficha__titulo { margin: 0; line-height: .92; }
+.lp-ficha__bajada {
+  margin: 0;
+  color: rgba(255, 255, 255, .62);
+  font-size: .9rem;
+  letter-spacing: .12em;
+  text-transform: uppercase;
 }
-.lp-ficha__detalles li {
+
+.lp-ficha__tarjetas {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+  gap: .9rem;
+  margin-top: auto;
+}
+.lp-ficha__tarjeta {
+  padding: 1.1rem 1.2rem;
+  border: 1px solid rgba(255, 255, 255, .1);
+  border-radius: 14px;
+  background: rgba(16, 16, 16, .72);
+}
+.lp-ficha__tarjeta h3 {
+  margin: 0 0 .7rem;
+  font-size: .78rem;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, .85);
+}
+.lp-ficha__tarjeta ul { margin: 0; padding: 0; list-style: none; display: grid; gap: .45rem; }
+.lp-ficha__tarjeta li {
   position: relative;
   padding-left: 1.1rem;
-  color: rgba(255, 255, 255, .72);
+  color: rgba(255, 255, 255, .78);
   font-size: .92rem;
 }
-.lp-ficha__detalles li::before {
+.lp-ficha__tarjeta li::before {
   content: "";
   position: absolute;
   left: 0;
-  top: .55em;
-  width: .42rem;
-  height: .42rem;
-  border-radius: 2px;
+  top: .5em;
+  width: .45rem;
+  height: .45rem;
+  border-radius: 999px;
   background: var(--lp-verde, #9AEC3F);
 }
-.lp-ficha__pie {
+.lp-ficha__tarjeta p { margin: 0; color: rgba(255, 255, 255, .78); font-size: .92rem; }
+
+.lp-ficha__compra {
+  display: grid;
+  grid-template-columns: minmax(0, .85fr) minmax(0, 1.15fr);
+  gap: .9rem;
+}
+.lp-ficha__cantidad {
   display: flex;
-  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: .6rem;
+  padding: .85rem 1.1rem;
+  border: 1px solid rgba(255, 255, 255, .1);
+  border-radius: 14px;
+  background: rgba(16, 16, 16, .72);
+  color: rgba(255, 255, 255, .6);
+  font-size: .85rem;
+}
+.lp-ficha__pasos { display: flex; align-items: center; gap: .55rem; }
+.lp-ficha__pasos button {
+  width: 2rem;
+  height: 2rem;
+  padding: 0;
+  border: 1px solid rgba(255, 255, 255, .18);
+  border-radius: 999px;
+  background: transparent;
+  color: #fff;
+  font-size: 1rem;
+  line-height: 1;
+  cursor: pointer;
+  transition: border-color .2s ease, color .2s ease;
+}
+.lp-ficha__pasos button:hover { border-color: var(--lp-verde, #9AEC3F); color: var(--lp-verde, #9AEC3F); }
+.lp-ficha__pasos strong { min-width: 1.4rem; text-align: center; color: #fff; font-size: 1rem; }
+
+.lp-ficha__agregar {
+  display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 1rem;
-  margin-top: auto;
-  padding-top: 1rem;
-  border-top: 1px solid rgba(255, 255, 255, .1);
-}
-.lp-ficha__precio { margin: 0; font-size: 1.7rem; font-weight: 700; line-height: 1; }
-.lp-ficha__stock { margin: .25rem 0 0; color: rgba(255, 255, 255, .55); font-size: .82rem; }
-.lp-ficha__agregar {
-  padding: .85rem 1.6rem;
+  padding: .95rem 1.4rem;
   border: 0;
-  border-radius: 999px;
+  border-radius: 14px;
   background: var(--lp-verde, #9AEC3F);
   color: var(--lp-grafito, #1A1A1A);
+  font-size: .95rem;
   font-weight: 700;
+  letter-spacing: .08em;
+  text-transform: uppercase;
   cursor: pointer;
   transition: filter .25s ease;
 }
 .lp-ficha__agregar:hover { filter: brightness(1.08); }
 .lp-ficha__agregar:disabled { opacity: .45; cursor: not-allowed; }
-.lp-ficha__volver {
-  align-self: flex-start;
-  padding: 0;
-  border: 0;
-  background: none;
-  color: rgba(255, 255, 255, .55);
-  font-size: .85rem;
-  text-decoration: underline;
-  cursor: pointer;
+.lp-ficha__agregar-precio { font-size: 1.05rem; }
+.lp-ficha__stock { margin: 0; color: rgba(255, 255, 255, .45); font-size: .8rem; }
+
+@media (max-width: 900px) {
+  .lp-ficha__caja {
+    grid-template-columns: 1fr;
+    grid-template-rows: minmax(0, .9fr) minmax(0, 1.1fr);
+    height: calc(100vh - 1.2rem);
+  }
+  .lp-ficha__flecha { width: 2.6rem; height: 2.6rem; }
+  .lp-ficha__compra { grid-template-columns: 1fr; }
+  .lp-ficha__tarjetas { margin-top: 1rem; }
 }
-.lp-ficha__volver:hover { color: #fff; }
-
-@media (max-width: 860px) {
-  .lp-ficha__cuerpo { grid-template-columns: 1fr; gap: 1.4rem; padding: 1.4rem; }
-  .lp-ficha__marco { aspect-ratio: 4 / 3; }
-  .lp-ficha__precio { font-size: 1.4rem; }
-}
-
-/* Marco de la ficha cuando el producto todavía no tiene foto */
-.lp-ficha__marco.sin-foto { gap: .8rem; background: radial-gradient(circle at 50% 45%, rgba(154, 236, 63, .08), rgba(154, 236, 63, 0) 62%), #121212; }
-.lp-ficha__icono { width: 28%; height: auto; filter: none; opacity: .9; }
-.lp-ficha__sinfoto { color: rgba(255, 255, 255, .45); font-size: .8rem; letter-spacing: .08em; text-transform: uppercase; }
-
-/* El atributo hidden tiene que ganarle al display de arriba (si no, la ficha queda visible vacía) */
-.lp-ficha[hidden],
-.lp-cart[hidden] { display: none !important; }
