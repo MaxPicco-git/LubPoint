@@ -115,6 +115,8 @@
         return {
           id: c.codigo + (c.variante ? "-" + slug(c.variante) : ""),
           productoId: p ? p.id : null,
+          codigo: c.codigo,
+          fotos: c.fotos && c.fotos.length ? c.fotos : (c.foto ? [c.foto] : []),
           variante: c.variante,
           nombre: c.variante ? `${c.nombre} · ${c.variante}` : c.nombre,
           detalle: [p && p.marca, c.presentacion].filter(Boolean).join(" · ") || c.categoria,
@@ -130,7 +132,7 @@
       if (delSistema) {
         const conFoto = new Set(catalogo.map(c => c.codigo));
         delSistema.filter(p => !conFoto.has(p.codigo)).forEach(p => lista.push({
-          id: p.codigo, productoId: p.id, variante: null, nombre: p.nombre,
+          id: p.codigo, productoId: p.id, codigo: p.codigo, fotos: [], variante: null, nombre: p.nombre,
           detalle: [p.marca, p.presentacion].filter(Boolean).join(" · ") || p.categoria,
           categoria: p.categoria, precio: p.precio, disponible: p.disponible, top: null
         }));
@@ -248,6 +250,11 @@
         ${p.top ? `<span class="lp-product__top">Top ${p.top}</span>` : ""}
         <span class="lp-product__cat">${esc(p.categoria)}</span>
         ${media(p, "lp-product")}
+        <button type="button" class="lp-product__ver" data-lp-ver="${esc(p.id)}"
+          aria-label="Ver detalles de ${esc(p.nombre)}">
+          ${patronHTML()}
+          <span class="lp-product__ver-texto">Ver producto</span>
+        </button>
       </div>
       <div class="lp-product__body">
         <h3 class="lp-product__name">${esc(p.nombre)}</h3>
@@ -289,6 +296,8 @@
         actualizarCarrito(true);
         return;
       }
+      const ver = e.target.closest("[data-lp-ver]");
+      if (ver) { abrirFicha(ver.dataset.lpVer); return; }
       const chip = e.target.closest(".lp-chip");
       if (chip) {
         state[chip.dataset.group] = chip.dataset.value;
@@ -496,6 +505,134 @@
       window.open(`https://wa.me/${WHATSAPP}?text=${encodeURIComponent(msg)}`, "_blank", "noopener");
     }
   });
+
+  // ------------------------------------------------------------------ Ficha del producto
+  /* Fondo de patrón en movimiento: dos copias idénticas una al lado de la otra dentro de una
+     pista que se desplaza exactamente el ancho de una copia. Cuando termina, la segunda quedó
+     justo donde estaba la primera, así que el bucle no tiene corte ni salto. */
+  function patronHTML() {
+    // sin loading="lazy": estas copias nacen dentro de elementos ocultos y el navegador
+    // nunca llegaría a pedirlas (son 66 KB de un único archivo, que además queda en caché)
+    const copia = '<img src="assets/fondo-patron.webp" alt="" decoding="async">';
+    // 4 copias: la pista siempre es más ancha que la caja, y el bucle avanza exactamente una copia
+    return '<span class="lp-patron" aria-hidden="true"><span class="lp-patron__pista">' +
+      copia.repeat(4) + "</span></span>";
+  }
+
+  const ficha = document.createElement("div");
+  ficha.className = "lp-ficha";
+  ficha.hidden = true;
+  ficha.setAttribute("data-lenis-prevent", "");
+  ficha.innerHTML = `
+    <div class="lp-ficha__fondo" data-lp-ficha-cerrar></div>
+    <article class="lp-ficha__caja" role="dialog" aria-modal="true" aria-labelledby="lp-ficha-titulo">
+      ${patronHTML()}
+      <button type="button" class="lp-ficha__cerrar" data-lp-ficha-cerrar aria-label="Volver atrás">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12M18 6 6 18"/></svg>
+      </button>
+      <div class="lp-ficha__cuerpo">
+        <div class="lp-ficha__galeria">
+          <div class="lp-ficha__marco"><img class="lp-ficha__foto" src="" alt=""></div>
+          <div class="lp-ficha__miniaturas" data-lp-ficha-miniaturas></div>
+        </div>
+        <div class="lp-ficha__texto">
+          <p class="lp-ficha__cat" data-lp-ficha-cat></p>
+          <h2 class="lp-ficha__titulo" id="lp-ficha-titulo" data-lp-ficha-nombre></h2>
+          <p class="lp-ficha__desc" data-lp-ficha-desc></p>
+          <ul class="lp-ficha__detalles" data-lp-ficha-detalles></ul>
+          <div class="lp-ficha__pie">
+            <div>
+              <p class="lp-ficha__precio" data-lp-ficha-precio></p>
+              <p class="lp-ficha__stock" data-lp-ficha-stock></p>
+            </div>
+            <button type="button" class="lp-ficha__agregar" data-lp-ficha-agregar></button>
+          </div>
+          <button type="button" class="lp-ficha__volver" data-lp-ficha-cerrar>Volver a la tienda</button>
+        </div>
+      </div>
+    </article>`;
+  document.body.appendChild(ficha);
+  const F = s => ficha.querySelector(s);
+
+  let fichaProducto = null;
+  let fichaFoco = null;
+
+  function pintarFicha(p) {
+    const datos = (window.LUBPOINT_FICHAS || {})[p.codigo] || {};
+    const fotos = p.fotos && p.fotos.length ? p.fotos : [];
+    F("[data-lp-ficha-cat]").textContent = p.categoria;
+    F("[data-lp-ficha-nombre]").textContent = p.nombre;
+    F("[data-lp-ficha-desc]").textContent = datos.d || "Pasá por el local y te asesoramos sobre este producto.";
+    F("[data-lp-ficha-detalles]").innerHTML = (datos.det || [])
+      .map(x => `<li>${esc(x)}</li>`).join("");
+    F("[data-lp-ficha-precio]").textContent = p.precio > 0 ? precio.format(p.precio) : "Consultar precio";
+    F("[data-lp-ficha-stock]").textContent = p.disponible == null ? ""
+      : (p.disponible > 0 ? `${p.disponible} disponibles` : "Sin stock por ahora");
+
+    // Si el producto todavía no tiene foto, mostramos el ícono de su categoría
+    const marco = F(".lp-ficha__marco");
+    marco.classList.toggle("sin-foto", !fotos.length);
+    marco.innerHTML = fotos.length
+      ? `<img class="lp-ficha__foto" src="${esc(fotos[0])}" alt="${esc(p.nombre)}">`
+      : `<img class="lp-ficha__icono" src="assets/icons/${iconoDe(p)}.svg" alt="">
+         <span class="lp-ficha__sinfoto">Foto en camino</span>`;
+    F("[data-lp-ficha-miniaturas]").innerHTML = fotos.length > 1
+      ? fotos.map((f, i) => `<button type="button" class="lp-ficha__mini${i === 0 ? " is-activa" : ""}" data-lp-ficha-foto="${esc(f)}">
+           <img src="${esc(f)}" alt="${esc(p.nombre)} · vista ${i + 1}" loading="lazy"></button>`).join("")
+      : "";
+
+    const boton = F("[data-lp-ficha-agregar]");
+    boton.textContent = textoCta(p);
+    boton.disabled = sinStock(p);
+    boton.classList.toggle("is-added", cart.qty(p.id) > 0);
+  }
+
+  function abrirFicha(id) {
+    const p = byId[id];
+    if (!p) return;
+    fichaProducto = p;
+    fichaFoco = document.activeElement;
+    pintarFicha(p);
+    ficha.hidden = false;
+    if (window.scrollLock) window.scrollLock.lock("ficha");
+    if (anim) {
+      gsap.fromTo(F(".lp-ficha__fondo"), { autoAlpha: 0 }, { autoAlpha: 1, duration: 0.35, ease: "power2.out" });
+      gsap.fromTo(F(".lp-ficha__caja"), { autoAlpha: 0, y: 28, scale: 0.98 },
+        { autoAlpha: 1, y: 0, scale: 1, duration: 0.5, ease: "expo.out" });
+    }
+    setTimeout(() => F(".lp-ficha__cerrar").focus(), 60);
+  }
+
+  function cerrarFicha() {
+    const listo = () => {
+      ficha.hidden = true;
+      if (window.scrollLock) window.scrollLock.unlock("ficha");
+      if (fichaFoco && fichaFoco.focus) fichaFoco.focus();
+      fichaProducto = null;
+    };
+    if (anim) {
+      gsap.to(F(".lp-ficha__caja"), { autoAlpha: 0, y: 20, duration: 0.3, ease: "power2.in" });
+      gsap.to(F(".lp-ficha__fondo"), { autoAlpha: 0, duration: 0.3, ease: "power2.in", onComplete: listo });
+    } else listo();
+  }
+
+  ficha.addEventListener("click", e => {
+    if (e.target.closest("[data-lp-ficha-cerrar]")) return cerrarFicha();
+    const mini = e.target.closest("[data-lp-ficha-foto]");
+    if (mini) {
+      const grande = F(".lp-ficha__foto");
+      if (grande) grande.src = mini.dataset.lpFichaFoto;
+      ficha.querySelectorAll(".lp-ficha__mini").forEach(b => b.classList.toggle("is-activa", b === mini));
+      return;
+    }
+    if (e.target.closest("[data-lp-ficha-agregar]") && fichaProducto && !sinStock(fichaProducto)) {
+      cart.add(fichaProducto.id);
+      pintarFicha(fichaProducto);
+      actualizarCarrito(true);
+      sincronizarTarjetas();
+    }
+  });
+  document.addEventListener("keydown", e => { if (e.key === "Escape" && !ficha.hidden) cerrarFicha(); });
 
   // El botón flotante del carrito solo aparece mientras la sección Tienda está en pantalla.
   const seccion = root.closest("section, [class^='section_']") || root;

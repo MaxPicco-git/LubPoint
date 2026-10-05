@@ -1589,3 +1589,267 @@ body {
 @media screen and (max-width: 767px) {
   .lp-credito { flex: 1 0 100%; order: 1; text-align: center; padding-top: .5rem; }
 }
+
+/* ---------------------------------------------------------------------------
+   Patrón de fondo en movimiento (hover de producto y ficha)
+   Dos copias idénticas dentro de una pista: al desplazarla exactamente el ancho
+   de una copia, la segunda queda donde estaba la primera y el bucle no se corta. */
+.lp-patron {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 0;
+}
+.lp-patron__pista {
+  position: absolute;
+  inset: 0 auto 0 0;
+  display: flex;
+  width: max-content;
+  will-change: transform;
+  animation: lp-patron-desliza 38s linear infinite;
+}
+.lp-patron__pista img {
+  display: block;
+  flex: 0 0 auto;
+  height: 100%;
+  width: auto;              /* mantiene la proporción: los logos no se deforman */
+  max-width: none;
+  filter: none;             /* la plantilla dessatura todas las imágenes */
+}
+/* La pista tiene 4 copias y avanza exactamente una (25%): al terminar, la copia siguiente
+   quedó en la misma posición que la anterior, así que el bucle es continuo. */
+@keyframes lp-patron-desliza {
+  from { transform: translate3d(0, 0, 0); }
+  to   { transform: translate3d(-25%, 0, 0); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .lp-patron__pista { animation: none; }
+}
+
+/* ---------------------------------------------------------------- Hover de la tarjeta */
+.lp-product__ver {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  display: grid;
+  place-items: center;
+  border: 0;
+  padding: 0;
+  cursor: pointer;
+  background: var(--lp-grafito, #1A1A1A);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity .38s ease, visibility .38s ease;
+}
+.lp-product:hover .lp-product__ver,
+.lp-product:focus-within .lp-product__ver,
+.lp-product__ver:focus-visible {
+  opacity: 1;
+  visibility: visible;
+}
+.lp-product__ver::after {            /* vela el patrón para que el texto se lea */
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(26, 26, 26, .55);
+  z-index: 1;
+}
+.lp-product__ver-texto {
+  position: relative;
+  z-index: 2;
+  padding: .7rem 1.4rem;
+  border: 1px solid var(--lp-verde, #9AEC3F);
+  border-radius: 999px;
+  color: var(--lp-verde, #9AEC3F);
+  font-size: .85rem;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  background: rgba(26, 26, 26, .6);
+  transition: background-color .25s ease, color .25s ease;
+}
+.lp-product__ver:hover .lp-product__ver-texto {
+  background: var(--lp-verde, #9AEC3F);
+  color: var(--lp-grafito, #1A1A1A);
+}
+
+/* ---------------------------------------------------------------- Ficha del producto */
+.lp-ficha {
+  position: fixed;
+  inset: 0;
+  z-index: 70;
+  display: grid;
+  place-items: center;
+  padding: 1.25rem;
+}
+.lp-ficha__fondo {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, .78);
+  backdrop-filter: blur(6px);
+}
+.lp-ficha__caja {
+  position: relative;
+  width: min(1020px, 100%);
+  max-height: calc(100vh - 2.5rem);
+  overflow: hidden auto;
+  border: 1px solid rgba(255, 255, 255, .12);
+  border-top: 3px solid var(--lp-verde, #9AEC3F);
+  border-radius: 16px;
+  background: var(--lp-grafito, #1A1A1A);
+  box-shadow: 0 2rem 5rem rgba(0, 0, 0, .6);
+}
+.lp-ficha__caja > .lp-patron { opacity: .5; }
+.lp-ficha__cuerpo {
+  position: relative;
+  z-index: 2;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr);
+  gap: 2rem;
+  padding: 2rem;
+  background: linear-gradient(180deg, rgba(26, 26, 26, .82), rgba(26, 26, 26, .94));
+}
+.lp-ficha__cerrar {
+  position: absolute;
+  top: .9rem;
+  right: .9rem;
+  z-index: 4;
+  display: grid;
+  place-items: center;
+  width: 2.6rem;
+  height: 2.6rem;
+  padding: 0;
+  border: 1px solid rgba(255, 255, 255, .18);
+  border-radius: 999px;
+  background: rgba(26, 26, 26, .75);
+  color: #fff;
+  cursor: pointer;
+  transition: background-color .25s ease, border-color .25s ease, transform .25s ease;
+}
+.lp-ficha__cerrar svg { width: 1.1rem; height: 1.1rem; }
+.lp-ficha__cerrar:hover {
+  background: var(--lp-verde, #9AEC3F);
+  border-color: var(--lp-verde, #9AEC3F);
+  color: var(--lp-grafito, #1A1A1A);
+  transform: rotate(90deg);
+}
+
+.lp-ficha__marco {
+  display: grid;
+  place-items: center;
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, .08);
+  border-radius: 12px;
+  background: #121212;
+}
+.lp-ficha__foto {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  filter: none;
+}
+.lp-ficha__miniaturas {
+  display: flex;
+  gap: .5rem;
+  margin-top: .7rem;
+  flex-wrap: wrap;
+}
+.lp-ficha__mini {
+  width: 4.4rem;
+  height: 4.4rem;
+  padding: 0;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, .14);
+  border-radius: 10px;
+  background: #121212;
+  cursor: pointer;
+  transition: border-color .25s ease, transform .25s ease;
+}
+.lp-ficha__mini img { width: 100%; height: 100%; object-fit: contain; filter: none; }
+.lp-ficha__mini:hover { transform: translateY(-2px); }
+.lp-ficha__mini.is-activa { border-color: var(--lp-verde, #9AEC3F); }
+
+.lp-ficha__texto { display: flex; flex-direction: column; gap: .75rem; }
+.lp-ficha__cat {
+  margin: 0;
+  color: var(--lp-verde, #9AEC3F);
+  font-size: .72rem;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+}
+.lp-ficha__titulo { margin: 0; line-height: .95; }
+.lp-ficha__desc { margin: 0; color: rgba(255, 255, 255, .8); }
+.lp-ficha__detalles {
+  margin: .2rem 0 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  gap: .45rem;
+}
+.lp-ficha__detalles li {
+  position: relative;
+  padding-left: 1.1rem;
+  color: rgba(255, 255, 255, .72);
+  font-size: .92rem;
+}
+.lp-ficha__detalles li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: .55em;
+  width: .42rem;
+  height: .42rem;
+  border-radius: 2px;
+  background: var(--lp-verde, #9AEC3F);
+}
+.lp-ficha__pie {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-top: auto;
+  padding-top: 1rem;
+  border-top: 1px solid rgba(255, 255, 255, .1);
+}
+.lp-ficha__precio { margin: 0; font-size: 1.7rem; font-weight: 700; line-height: 1; }
+.lp-ficha__stock { margin: .25rem 0 0; color: rgba(255, 255, 255, .55); font-size: .82rem; }
+.lp-ficha__agregar {
+  padding: .85rem 1.6rem;
+  border: 0;
+  border-radius: 999px;
+  background: var(--lp-verde, #9AEC3F);
+  color: var(--lp-grafito, #1A1A1A);
+  font-weight: 700;
+  cursor: pointer;
+  transition: filter .25s ease;
+}
+.lp-ficha__agregar:hover { filter: brightness(1.08); }
+.lp-ficha__agregar:disabled { opacity: .45; cursor: not-allowed; }
+.lp-ficha__volver {
+  align-self: flex-start;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: rgba(255, 255, 255, .55);
+  font-size: .85rem;
+  text-decoration: underline;
+  cursor: pointer;
+}
+.lp-ficha__volver:hover { color: #fff; }
+
+@media (max-width: 860px) {
+  .lp-ficha__cuerpo { grid-template-columns: 1fr; gap: 1.4rem; padding: 1.4rem; }
+  .lp-ficha__marco { aspect-ratio: 4 / 3; }
+  .lp-ficha__precio { font-size: 1.4rem; }
+}
+
+/* Marco de la ficha cuando el producto todavía no tiene foto */
+.lp-ficha__marco.sin-foto { gap: .8rem; background: radial-gradient(circle at 50% 45%, rgba(154, 236, 63, .08), rgba(154, 236, 63, 0) 62%), #121212; }
+.lp-ficha__icono { width: 28%; height: auto; filter: none; opacity: .9; }
+.lp-ficha__sinfoto { color: rgba(255, 255, 255, .45); font-size: .8rem; letter-spacing: .08em; text-transform: uppercase; }
+
+/* El atributo hidden tiene que ganarle al display de arriba (si no, la ficha queda visible vacía) */
+.lp-ficha[hidden],
+.lp-cart[hidden] { display: none !important; }

@@ -12,3 +12,6 @@ INSERT INTO productos (codigo, sku, nombre, categoria, presentacion, precio, sto
 INSERT INTO productos (codigo, sku, nombre, categoria, presentacion, precio, stock, stock_minimo, visible, activo)
   SELECT '408', 'LUB-408', 'Cadena moto', 'Accesorios moto', '', 0, 0, 1, 1, 1
   WHERE NOT EXISTS (SELECT 1 FROM productos WHERE codigo = '408');
+INSERT INTO productos (codigo, sku, nombre, categoria, presentacion, precio, stock, stock_minimo, visible, activo)
+  SELECT '149', 'LUB-149', 'Grasa de litio MATCH 235 cc aerosol', 'Limpieza y cuidado', '235 cc', 0, 0, 1, 1, 1
+  WHERE NOT EXISTS (SELECT 1 FROM productos WHERE codigo = '149');

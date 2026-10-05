@@ -1,16 +1,17 @@
 /* LUBPOINT · Catálogo de la tienda (generado desde las fotos del cliente).
    Cada tarjeta lleva el CÓDIGO del producto en el sistema: así el pedido descuenta
-   el stock correcto aunque el nombre que ve el cliente incluya la variante. */
+   el stock correcto aunque el nombre que ve el cliente incluya la variante.
+   Las descripciones que se ven al abrir el producto están en js/fichas.js */
 window.LUBPOINT_CATALOGO = [
  {
   "codigo": "205",
   "nombre": "Calcomanía Moto Spektor",
-  "variante": "Honda transparente",
+  "variante": "Boca Juniors",
   "categoria": "Accesorios",
   "presentacion": "",
-  "foto": "assets/productos/205-calcomania-moto-honda-trasparente-spektor.webp",
+  "foto": "assets/productos/205-boca-juniors-a.webp",
   "fotos": [
-   "assets/productos/205-calcomania-moto-honda-trasparente-spektor.webp"
+   "assets/productos/205-boca-juniors-a.webp"
   ]
  },
  {
@@ -19,20 +20,9 @@ window.LUBPOINT_CATALOGO = [
   "variante": "Honda azul y negro",
   "categoria": "Accesorios",
   "presentacion": "",
-  "foto": "assets/productos/206-calcomania-moto-honda-azul-y-negro-spektor.webp",
+  "foto": "assets/productos/205-honda-azul-y-negro-a.webp",
   "fotos": [
-   "assets/productos/206-calcomania-moto-honda-azul-y-negro-spektor.webp"
-  ]
- },
- {
-  "codigo": "205",
-  "nombre": "Calcomanía Moto Spektor",
-  "variante": "Honda transparente II",
-  "categoria": "Accesorios",
-  "presentacion": "",
-  "foto": "assets/productos/207-calcomania-moto-honda-trasparente-2-spektor.webp",
-  "fotos": [
-   "assets/productos/207-calcomania-moto-honda-trasparente-2-spektor.webp"
+   "assets/productos/205-honda-azul-y-negro-a.webp"
   ]
  },
  {
@@ -41,9 +31,31 @@ window.LUBPOINT_CATALOGO = [
   "variante": "Honda Repsol",
   "categoria": "Accesorios",
   "presentacion": "",
-  "foto": "assets/productos/208-calcomania-moto-honda-repsol-spektor.webp",
+  "foto": "assets/productos/205-honda-repsol-a.webp",
   "fotos": [
-   "assets/productos/208-calcomania-moto-honda-repsol-spektor.webp"
+   "assets/productos/205-honda-repsol-a.webp"
+  ]
+ },
+ {
+  "codigo": "205",
+  "nombre": "Calcomanía Moto Spektor",
+  "variante": "Honda transparente",
+  "categoria": "Accesorios",
+  "presentacion": "",
+  "foto": "assets/productos/205-honda-transparente-a.webp",
+  "fotos": [
+   "assets/productos/205-honda-transparente-a.webp"
+  ]
+ },
+ {
+  "codigo": "205",
+  "nombre": "Calcomanía Moto Spektor",
+  "variante": "Honda transparente II",
+  "categoria": "Accesorios",
+  "presentacion": "",
+  "foto": "assets/productos/205-honda-transparente-ii-a.webp",
+  "fotos": [
+   "assets/productos/205-honda-transparente-ii-a.webp"
   ]
  },
  {
@@ -52,20 +64,9 @@ window.LUBPOINT_CATALOGO = [
   "variante": "Zanella",
   "categoria": "Accesorios",
   "presentacion": "",
-  "foto": "assets/productos/209-calcomania-moto-zanella-spektor.webp",
+  "foto": "assets/productos/205-zanella-a.webp",
   "fotos": [
-   "assets/productos/209-calcomania-moto-zanella-spektor.webp"
-  ]
- },
- {
-  "codigo": "205",
-  "nombre": "Calcomanía Moto Spektor",
-  "variante": "Boca Juniors",
-  "categoria": "Accesorios",
-  "presentacion": "",
-  "foto": "assets/productos/210-calcomania-moto-boca-juniors-spektor.webp",
-  "fotos": [
-   "assets/productos/210-calcomania-moto-boca-juniors-spektor.webp"
+   "assets/productos/205-zanella-a.webp"
   ]
  },
  {
@@ -74,11 +75,11 @@ window.LUBPOINT_CATALOGO = [
   "variante": null,
   "categoria": "Accesorios",
   "presentacion": "",
-  "foto": "assets/productos/212-a-cree-led-s6-h4-22-000-lm.webp",
+  "foto": "assets/productos/207-a.webp",
   "fotos": [
-   "assets/productos/212-a-cree-led-s6-h4-22-000-lm.webp",
-   "assets/productos/212-c-cree-led-s6-h4-22-000-lm.webp",
-   "assets/productos/212-e-cree-led-s6-h4-22-000-lm.webp"
+   "assets/productos/207-a.webp",
+   "assets/productos/207-c.webp",
+   "assets/productos/207-e.webp"
   ]
  },
  {
@@ -87,9 +88,9 @@ window.LUBPOINT_CATALOGO = [
   "variante": null,
   "categoria": "Accesorios",
   "presentacion": "",
-  "foto": "assets/productos/200-cubre-volante-ecocuero.webp",
+  "foto": "assets/productos/200-a.webp",
   "fotos": [
-   "assets/productos/200-cubre-volante-ecocuero.webp"
+   "assets/productos/200-a.webp"
   ]
  },
  {
@@ -98,9 +99,9 @@ window.LUBPOINT_CATALOGO = [
   "variante": null,
   "categoria": "Accesorios",
   "presentacion": "",
-  "foto": "assets/productos/211-foco-posicion.webp",
+  "foto": "assets/productos/206-a.webp",
   "fotos": [
-   "assets/productos/211-foco-posicion.webp"
+   "assets/productos/206-a.webp"
   ]
  },
  {
@@ -109,11 +110,11 @@ window.LUBPOINT_CATALOGO = [
   "variante": null,
   "categoria": "Accesorios",
   "presentacion": "",
-  "foto": "assets/productos/201-a-la-gotita.webp",
+  "foto": "assets/productos/201-a.webp",
   "fotos": [
-   "assets/productos/201-a-la-gotita.webp",
-   "assets/productos/201-b-la-gotita.webp",
-   "assets/productos/201-c-la-gotita.webp"
+   "assets/productos/201-a.webp",
+   "assets/productos/201-c.webp",
+   "assets/productos/201-e.webp"
   ]
  },
  {
@@ -122,9 +123,9 @@ window.LUBPOINT_CATALOGO = [
   "variante": null,
   "categoria": "Accesorios",
   "presentacion": "",
-  "foto": "assets/productos/203-manguera-3x6-x-metro.webp",
+  "foto": "assets/productos/203-a.webp",
   "fotos": [
-   "assets/productos/203-manguera-3x6-x-metro.webp"
+   "assets/productos/203-a.webp"
   ]
  },
  {
@@ -133,9 +134,9 @@ window.LUBPOINT_CATALOGO = [
   "variante": null,
   "categoria": "Accesorios",
   "presentacion": "",
-  "foto": "assets/productos/202-manguera-6x9-x-metro.webp",
+  "foto": "assets/productos/202-a.webp",
   "fotos": [
-   "assets/productos/202-manguera-6x9-x-metro.webp"
+   "assets/productos/202-a.webp"
   ]
  },
  {
@@ -189,22 +190,10 @@ window.LUBPOINT_CATALOGO = [
   "variante": null,
   "categoria": "Aceites",
   "presentacion": "",
-  "foto": "assets/productos/007-a-aceite-ypf-rod-moto-envasado.webp",
+  "foto": "assets/productos/007-a.webp",
   "fotos": [
-   "assets/productos/007-a-aceite-ypf-rod-moto-envasado.webp",
-   "assets/productos/007-c-aceite-ypf-rod-moto-envasado.webp"
-  ]
- },
- {
-  "codigo": "156",
-  "nombre": "Aromatizante ambiente MATCH 60 ml atomizador",
-  "variante": "Italia",
-  "categoria": "Limpieza y cuidado",
-  "presentacion": "",
-  "foto": "assets/productos/156-a-aromatizante-ambiente-match-60-ml-italia-atomizador.webp",
-  "fotos": [
-   "assets/productos/156-a-aromatizante-ambiente-match-60-ml-italia-atomizador.webp",
-   "assets/productos/156-c-aromatizante-ambiente-match-60-ml-italia-atomizador.webp"
+   "assets/productos/007-a.webp",
+   "assets/productos/007-c.webp"
   ]
  },
  {
@@ -213,10 +202,10 @@ window.LUBPOINT_CATALOGO = [
   "variante": "Aqua",
   "categoria": "Limpieza y cuidado",
   "presentacion": "",
-  "foto": "assets/productos/157-a-aromatizante-ambiente-match-60-ml-aqua-atomizador.webp",
+  "foto": "assets/productos/156-aqua-a.webp",
   "fotos": [
-   "assets/productos/157-a-aromatizante-ambiente-match-60-ml-aqua-atomizador.webp",
-   "assets/productos/157-c-aromatizante-ambiente-match-60-ml-aqua-atomizador.webp"
+   "assets/productos/156-aqua-a.webp",
+   "assets/productos/156-aqua-c.webp"
   ]
  },
  {
@@ -225,9 +214,10 @@ window.LUBPOINT_CATALOGO = [
   "variante": "Francia",
   "categoria": "Limpieza y cuidado",
   "presentacion": "",
-  "foto": "assets/productos/158-aromatizante-ambiente-match-60-ml-francia-atomizador.webp",
+  "foto": "assets/productos/156-francia-a.webp",
   "fotos": [
-   "assets/productos/158-aromatizante-ambiente-match-60-ml-francia-atomizador.webp"
+   "assets/productos/156-francia-a.webp",
+   "assets/productos/156-francia-c.webp"
   ]
  },
  {
@@ -236,10 +226,22 @@ window.LUBPOINT_CATALOGO = [
   "variante": "Frutilla",
   "categoria": "Limpieza y cuidado",
   "presentacion": "",
-  "foto": "assets/productos/159-a-aromatizante-ambiente-match-60-ml-frutilla-atomizador.webp",
+  "foto": "assets/productos/156-frutilla-a.webp",
   "fotos": [
-   "assets/productos/159-a-aromatizante-ambiente-match-60-ml-frutilla-atomizador.webp",
-   "assets/productos/159-c-aromatizante-ambiente-match-60-ml-frutilla-atomizador.webp"
+   "assets/productos/156-frutilla-a.webp",
+   "assets/productos/156-frutilla-c.webp"
+  ]
+ },
+ {
+  "codigo": "156",
+  "nombre": "Aromatizante ambiente MATCH 60 ml atomizador",
+  "variante": "Italia",
+  "categoria": "Limpieza y cuidado",
+  "presentacion": "",
+  "foto": "assets/productos/156-italia-a.webp",
+  "fotos": [
+   "assets/productos/156-italia-a.webp",
+   "assets/productos/156-italia-c.webp"
   ]
  },
  {
@@ -259,10 +261,22 @@ window.LUBPOINT_CATALOGO = [
   "variante": null,
   "categoria": "Limpieza y cuidado",
   "presentacion": "",
-  "foto": "assets/productos/151-a-arranca-motores-match-400-cc-aerosol.webp",
+  "foto": "assets/productos/151-a.webp",
   "fotos": [
-   "assets/productos/151-a-arranca-motores-match-400-cc-aerosol.webp",
-   "assets/productos/151-c-arranca-motores-match-400-cc-aerosol.webp"
+   "assets/productos/151-a.webp",
+   "assets/productos/151-c.webp"
+  ]
+ },
+ {
+  "codigo": "149",
+  "nombre": "Grasa de litio MATCH 235 cc aerosol",
+  "variante": null,
+  "categoria": "Limpieza y cuidado",
+  "presentacion": "235 cc",
+  "foto": "assets/productos/149-a.webp",
+  "fotos": [
+   "assets/productos/149-a.webp",
+   "assets/productos/149-c.webp"
   ]
  },
  {
@@ -271,10 +285,10 @@ window.LUBPOINT_CATALOGO = [
   "variante": null,
   "categoria": "Limpieza y cuidado",
   "presentacion": "",
-  "foto": "assets/productos/153-a-lava-autos-match-500-cc.webp",
+  "foto": "assets/productos/153-a.webp",
   "fotos": [
-   "assets/productos/153-a-lava-autos-match-500-cc.webp",
-   "assets/productos/153-c-lava-autos-match-500-cc.webp"
+   "assets/productos/153-a.webp",
+   "assets/productos/153-c.webp"
   ]
  },
  {
@@ -283,10 +297,10 @@ window.LUBPOINT_CATALOGO = [
   "variante": null,
   "categoria": "Limpieza y cuidado",
   "presentacion": "500 cc",
-  "foto": "assets/productos/154-a-lava-lustre-match-500-cc.webp",
+  "foto": "assets/productos/160-a.webp",
   "fotos": [
-   "assets/productos/154-a-lava-lustre-match-500-cc.webp",
-   "assets/productos/154-c-lava-lustre-match-500-cc.webp"
+   "assets/productos/160-a.webp",
+   "assets/productos/160-c.webp"
   ]
  },
  {
@@ -295,32 +309,22 @@ window.LUBPOINT_CATALOGO = [
   "variante": null,
   "categoria": "Limpieza y cuidado",
   "presentacion": "",
-  "foto": "assets/productos/150-a-lubricante-cadena-match-250-cc-aerosol.webp",
+  "foto": "assets/productos/150-a.webp",
   "fotos": [
-   "assets/productos/150-a-lubricante-cadena-match-250-cc-aerosol.webp",
-   "assets/productos/150-c-lubricante-cadena-match-250-cc-aerosol.webp"
+   "assets/productos/150-a.webp",
+   "assets/productos/150-c.webp"
   ]
  },
  {
-  "codigo": "158",
-  "nombre": "Perfume auto Jarama 50 ml atomizador",
-  "variante": "Wind",
+  "codigo": "152",
+  "nombre": "Lubricante filtros MATCH 210 cc aerosol",
+  "variante": null,
   "categoria": "Limpieza y cuidado",
   "presentacion": "",
-  "foto": "assets/productos/165-perfume-auto-wind-jarama-50-ml-atomizador.webp",
+  "foto": "assets/productos/152-a.webp",
   "fotos": [
-   "assets/productos/165-perfume-auto-wind-jarama-50-ml-atomizador.webp"
-  ]
- },
- {
-  "codigo": "158",
-  "nombre": "Perfume auto Jarama 50 ml atomizador",
-  "variante": "Kend",
-  "categoria": "Limpieza y cuidado",
-  "presentacion": "",
-  "foto": "assets/productos/166-perfume-auto-kend-jarama-50-ml-atomizador.webp",
-  "fotos": [
-   "assets/productos/166-perfume-auto-kend-jarama-50-ml-atomizador.webp"
+   "assets/productos/152-a.webp",
+   "assets/productos/152-c.webp"
   ]
  },
  {
@@ -329,9 +333,31 @@ window.LUBPOINT_CATALOGO = [
   "variante": "Dragon",
   "categoria": "Limpieza y cuidado",
   "presentacion": "",
-  "foto": "assets/productos/167-perfume-auto-dragon-jarama-50-ml-atomizador.webp",
+  "foto": "assets/productos/158-dragon-a.webp",
   "fotos": [
-   "assets/productos/167-perfume-auto-dragon-jarama-50-ml-atomizador.webp"
+   "assets/productos/158-dragon-a.webp"
+  ]
+ },
+ {
+  "codigo": "158",
+  "nombre": "Perfume auto Jarama 50 ml atomizador",
+  "variante": "Kend",
+  "categoria": "Limpieza y cuidado",
+  "presentacion": "",
+  "foto": "assets/productos/158-kend-a.webp",
+  "fotos": [
+   "assets/productos/158-kend-a.webp"
+  ]
+ },
+ {
+  "codigo": "158",
+  "nombre": "Perfume auto Jarama 50 ml atomizador",
+  "variante": "Wind",
+  "categoria": "Limpieza y cuidado",
+  "presentacion": "",
+  "foto": "assets/productos/158-wind-a.webp",
+  "fotos": [
+   "assets/productos/158-wind-a.webp"
   ]
  },
  {
@@ -340,20 +366,9 @@ window.LUBPOINT_CATALOGO = [
   "variante": "Clásico",
   "categoria": "Limpieza y cuidado",
   "presentacion": "",
-  "foto": "assets/productos/161-renovador-siliconado-clasico-match-250-cc.webp",
+  "foto": "assets/productos/157-clasico-a.webp",
   "fotos": [
-   "assets/productos/161-renovador-siliconado-clasico-match-250-cc.webp"
-  ]
- },
- {
-  "codigo": "157",
-  "nombre": "Renovador siliconado MATCH 250 cc",
-  "variante": "Sexy",
-  "categoria": "Limpieza y cuidado",
-  "presentacion": "",
-  "foto": "assets/productos/162-renovador-siliconado-sexy-match-250-cc.webp",
-  "fotos": [
-   "assets/productos/162-renovador-siliconado-sexy-match-250-cc.webp"
+   "assets/productos/157-clasico-a.webp"
   ]
  },
  {
@@ -362,9 +377,9 @@ window.LUBPOINT_CATALOGO = [
   "variante": "Limón",
   "categoria": "Limpieza y cuidado",
   "presentacion": "",
-  "foto": "assets/productos/163-renovador-siliconado-limon-match-250-cc.webp",
+  "foto": "assets/productos/157-limon-a.webp",
   "fotos": [
-   "assets/productos/163-renovador-siliconado-limon-match-250-cc.webp"
+   "assets/productos/157-limon-a.webp"
   ]
  },
  {
@@ -373,9 +388,20 @@ window.LUBPOINT_CATALOGO = [
   "variante": "Manzana",
   "categoria": "Limpieza y cuidado",
   "presentacion": "",
-  "foto": "assets/productos/164-renovador-siliconado-manzana-match-250-cc.webp",
+  "foto": "assets/productos/157-manzana-a.webp",
   "fotos": [
-   "assets/productos/164-renovador-siliconado-manzana-match-250-cc.webp"
+   "assets/productos/157-manzana-a.webp"
+  ]
+ },
+ {
+  "codigo": "157",
+  "nombre": "Renovador siliconado MATCH 250 cc",
+  "variante": "Sexy",
+  "categoria": "Limpieza y cuidado",
+  "presentacion": "",
+  "foto": "assets/productos/157-sexy-a.webp",
+  "fotos": [
+   "assets/productos/157-sexy-a.webp"
   ]
  },
  {
@@ -384,10 +410,10 @@ window.LUBPOINT_CATALOGO = [
   "variante": null,
   "categoria": "Limpieza y cuidado",
   "presentacion": "",
-  "foto": "assets/productos/155-a-revitalizador-cubiertas-y-alfombras-match-500-cc.webp",
+  "foto": "assets/productos/155-a.webp",
   "fotos": [
-   "assets/productos/155-a-revitalizador-cubiertas-y-alfombras-match-500-cc.webp",
-   "assets/productos/155-c-revitalizador-cubiertas-y-alfombras-match-500-cc.webp"
+   "assets/productos/155-a.webp",
+   "assets/productos/155-c.webp"
   ]
  },
  {
@@ -396,9 +422,9 @@ window.LUBPOINT_CATALOGO = [
   "variante": null,
   "categoria": "Líquidos y refrigerantes",
   "presentacion": "",
-  "foto": "assets/productos/101-agua-desmineralizada-1-l.webp",
+  "foto": "assets/productos/101-a.webp",
   "fotos": [
-   "assets/productos/101-agua-desmineralizada-1-l.webp"
+   "assets/productos/101-a.webp"
   ]
  },
  {
@@ -407,9 +433,9 @@ window.LUBPOINT_CATALOGO = [
   "variante": null,
   "categoria": "Líquidos y refrigerantes",
   "presentacion": "",
-  "foto": "assets/productos/100-agua-desmineralizada-1-l-verde.webp",
+  "foto": "assets/productos/100-a.webp",
   "fotos": [
-   "assets/productos/100-agua-desmineralizada-1-l-verde.webp"
+   "assets/productos/100-a.webp"
   ]
  },
  {
@@ -418,10 +444,10 @@ window.LUBPOINT_CATALOGO = [
   "variante": null,
   "categoria": "Líquidos y refrigerantes",
   "presentacion": "5 L",
-  "foto": "assets/productos/105-a-agua-desmineralizada-con-aditivos-match-5-l.webp",
+  "foto": "assets/productos/109-a.webp",
   "fotos": [
-   "assets/productos/105-a-agua-desmineralizada-con-aditivos-match-5-l.webp",
-   "assets/productos/105-b-agua-desmineralizada-con-aditivos-match-5-l.webp"
+   "assets/productos/109-a.webp",
+   "assets/productos/109-b.webp"
   ]
  },
  {
@@ -430,10 +456,10 @@ window.LUBPOINT_CATALOGO = [
   "variante": null,
   "categoria": "Líquidos y refrigerantes",
   "presentacion": "",
-  "foto": "assets/productos/104-a-agua-rosa-desmineralizada-con-aditivos-match-5-l.webp",
+  "foto": "assets/productos/103-a.webp",
   "fotos": [
-   "assets/productos/104-a-agua-rosa-desmineralizada-con-aditivos-match-5-l.webp",
-   "assets/productos/104-c-agua-rosa-desmineralizada-con-aditivos-match-5-l.webp"
+   "assets/productos/103-a.webp",
+   "assets/productos/103-b.webp"
   ]
  },
  {
@@ -442,10 +468,10 @@ window.LUBPOINT_CATALOGO = [
   "variante": null,
   "categoria": "Líquidos y refrigerantes",
   "presentacion": "5 L",
-  "foto": "assets/productos/103-a-agua-verde-claro-desmineralizada-con-aditivos-match-5-l.webp",
+  "foto": "assets/productos/108-a.webp",
   "fotos": [
-   "assets/productos/103-a-agua-verde-claro-desmineralizada-con-aditivos-match-5-l.webp",
-   "assets/productos/103-b-agua-verde-claro-desmineralizada-con-aditivos-match-5-l.webp"
+   "assets/productos/108-a.webp",
+   "assets/productos/108-b.webp"
   ]
  },
  {
@@ -454,10 +480,10 @@ window.LUBPOINT_CATALOGO = [
   "variante": null,
   "categoria": "Líquidos y refrigerantes",
   "presentacion": "",
-  "foto": "assets/productos/102-a-agua-verde-desmineralizada-con-aditivos-match-s-l.webp",
+  "foto": "assets/productos/102-a.webp",
   "fotos": [
-   "assets/productos/102-a-agua-verde-desmineralizada-con-aditivos-match-s-l.webp",
-   "assets/productos/102-b-agua-verde-desmineralizada-con-aditivos-match-s-l.webp"
+   "assets/productos/102-a.webp",
+   "assets/productos/102-b.webp"
   ]
  },
  {
@@ -466,10 +492,10 @@ window.LUBPOINT_CATALOGO = [
   "variante": null,
   "categoria": "Líquidos y refrigerantes",
   "presentacion": "",
-  "foto": "assets/productos/109-a-infla-y-sella-neumaticos-300-g.webp",
+  "foto": "assets/productos/107-a.webp",
   "fotos": [
-   "assets/productos/109-a-infla-y-sella-neumaticos-300-g.webp",
-   "assets/productos/109-c-infla-y-sella-neumaticos-300-g.webp"
+   "assets/productos/107-a.webp",
+   "assets/productos/107-b.webp"
   ]
  },
  {
@@ -478,10 +504,10 @@ window.LUBPOINT_CATALOGO = [
   "variante": null,
   "categoria": "Líquidos y refrigerantes",
   "presentacion": "",
-  "foto": "assets/productos/106-a-liquido-de-frenos-match-100-cc.webp",
+  "foto": "assets/productos/106-a.webp",
   "fotos": [
-   "assets/productos/106-a-liquido-de-frenos-match-100-cc.webp",
-   "assets/productos/106-c-liquido-de-frenos-match-100-cc.webp"
+   "assets/productos/106-a.webp",
+   "assets/productos/106-c.webp"
   ]
  },
  {
@@ -490,10 +516,10 @@ window.LUBPOINT_CATALOGO = [
   "variante": null,
   "categoria": "Líquidos y refrigerantes",
   "presentacion": "",
-  "foto": "assets/productos/107b-a-liquido-de-frenos-match-180-cc.webp",
+  "foto": "assets/productos/105-a.webp",
   "fotos": [
-   "assets/productos/107b-a-liquido-de-frenos-match-180-cc.webp",
-   "assets/productos/107b-c-liquido-de-frenos-match-180-cc.webp"
+   "assets/productos/105-a.webp",
+   "assets/productos/105-b.webp"
   ]
  },
  {
@@ -502,10 +528,10 @@ window.LUBPOINT_CATALOGO = [
   "variante": null,
   "categoria": "Líquidos y refrigerantes",
   "presentacion": "",
-  "foto": "assets/productos/108-a-liquido-de-frenos-match-350-cc.webp",
+  "foto": "assets/productos/104-a.webp",
   "fotos": [
-   "assets/productos/108-a-liquido-de-frenos-match-350-cc.webp",
-   "assets/productos/108-c-liquido-de-frenos-match-350-cc.webp"
+   "assets/productos/104-a.webp",
+   "assets/productos/104-b.webp"
   ]
  },
  {
@@ -514,9 +540,9 @@ window.LUBPOINT_CATALOGO = [
   "variante": null,
   "categoria": "Neumáticos y cámaras",
   "presentacion": "",
-  "foto": "assets/productos/253-camara-atlantic-rodado-14.webp",
+  "foto": "assets/productos/254-a.webp",
   "fotos": [
-   "assets/productos/253-camara-atlantic-rodado-14.webp"
+   "assets/productos/254-a.webp"
   ]
  },
  {
@@ -525,9 +551,9 @@ window.LUBPOINT_CATALOGO = [
   "variante": null,
   "categoria": "Neumáticos y cámaras",
   "presentacion": "",
-  "foto": "assets/productos/254-camara-osaka-rodado-17.webp",
+  "foto": "assets/productos/253-a.webp",
   "fotos": [
-   "assets/productos/254-camara-osaka-rodado-17.webp"
+   "assets/productos/253-a.webp"
   ]
  },
  {
@@ -536,9 +562,9 @@ window.LUBPOINT_CATALOGO = [
   "variante": null,
   "categoria": "Neumáticos y cámaras",
   "presentacion": "",
-  "foto": "assets/productos/255-camara-osaka-rodado-18.webp",
+  "foto": "assets/productos/255-a.webp",
   "fotos": [
-   "assets/productos/255-camara-osaka-rodado-18.webp"
+   "assets/productos/255-a.webp"
   ]
  },
  {
